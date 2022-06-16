@@ -543,30 +543,30 @@ VALUES
 -- Q  U  E  R  I  E  S --
     --  Dades dels proveidors de cada una de les ulleres:
     /* SELECT
-                                                                                                                                                                                                id_ullera,
-                                                                                                                                                                                                ulleres.id_marca,
-                                                                                                                                                                                                marques.nom_marca,
-                                                                                                                                                                                                adreces.*
-                                                                                                                                                                                            FROM
-                                                                                                                                                                                                (
-                                                                                                                                                                                                    (
-                                                                                                                                                                                                        (
-                                                                                                                                                                                                            ulleres
-                                                                                                                                                                                                            INNER JOIN marques ON ulleres.id_marca = marques.id_marca
-                                                                                                                                                                                                        )
-                                                                                                                                                                                                        INNER JOIN proveidors ON proveidors.id_proveidor = marques.id_proveidor
-                                                                                                                                                                                                    )
-                                                                                                                                                                                                    INNER JOIN adreces ON proveidors.id_proveidor = adreces.id_proveidor
-                                                                                                                                                                                                );
-                                                                                                                                                                                            -- Dades de tots els proveidors
-                                                                                                                                                                                            SELECT
-                                                                                                                                                                                                *
-                                                                                                                                                                                            FROM
-                                                                                                                                                                                                proveidors
-                                                                                                                                                                                                INNER JOIN adreces ON proveidors.id_proveidor = adreces.id_proveidor; */
+                                                                                                                                                                                                                                                        id_ullera,
+                                                                                                                                                                                                                                                        ulleres.id_marca,
+                                                                                                                                                                                                                                                        marques.nom_marca,
+                                                                                                                                                                                                                                                        adreces.*
+                                                                                                                                                                                                                                                    FROM
+                                                                                                                                                                                                                                                        (
+                                                                                                                                                                                                                                                            (
+                                                                                                                                                                                                                                                                (
+                                                                                                                                                                                                                                                                    ulleres
+                                                                                                                                                                                                                                                                    INNER JOIN marques ON ulleres.id_marca = marques.id_marca
+                                                                                                                                                                                                                                                                )
+                                                                                                                                                                                                                                                                INNER JOIN proveidors ON proveidors.id_proveidor = marques.id_proveidor
+                                                                                                                                                                                                                                                            )
+                                                                                                                                                                                                                                                            INNER JOIN adreces ON proveidors.id_proveidor = adreces.id_proveidor
+                                                                                                                                                                                                                                                        );
+                                                                                                                                                                                                                                                    -- Dades de tots els proveidors
+                                                                                                                                                                                                                                                    SELECT
+                                                                                                                                                                                                                                                        *
+                                                                                                                                                                                                                                                    FROM
+                                                                                                                                                                                                                                                        proveidors
+                                                                                                                                                                                                                                                        INNER JOIN adreces ON proveidors.id_proveidor = adreces.id_proveidor; */
     /* SELECT Orders.OrderID, Customers.CustomerName
-                                                                                                                                                                                                                FROM Orders
-                                                                                                                                                                                                                INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID; */
+                                                                                                                                                                                                                                                                        FROM Orders
+                                                                                                                                                                                                                                                                        INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID; */
     /* 1. Llista el total de factures d 'un client/a en un període determinat.*/
 SELECT
     client,
@@ -594,15 +594,27 @@ FROM
     (
         (
             (
+                ulleres
+                INNER JOIN vendes ON vendes.ullera = ulleres.id_ullera
+            )
+            INNER JOIN marques ON marques.id_proveidor = ulleres.id_marca
+        )
+        INNER JOIN proveidors ON proveidors.id_proveidor = marques.id_proveidor
+    );
+
+/* FROM
+        (
+            (
                 (
                     (
-                        proveidors
-                        INNER JOIN marques ON marques.id_proveidor = proveidors.id_proveidor
+                        (
+                            proveidors
+                            INNER JOIN marques ON marques.id_proveidor = proveidors.id_proveidor
+                        )
+                        inner JOIN marques on marques.id_proveidor = ulleres.id_ullera
                     )
-                    inner JOIN marques on marques.id_proveidor = ulleres.id_ullera
                 )
+                INNER JOIN ulleres ON ulleres.id_ullera = vendes.ullera
             )
-            INNER JOIN ulleres ON ulleres.id_ullera = vendes.ullera
-        )
-        INNER JOIN vendes ON vendes.ullera = ullera.id_ullera
-    );
+            INNER JOIN vendes ON vendes.ullera = ulleres.id_ullera
+        ); */

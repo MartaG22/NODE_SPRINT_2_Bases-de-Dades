@@ -542,31 +542,67 @@ VALUES
     (10, 'F20-239', '1209876547', 2, 3, '2020-09-23');
 -- Q  U  E  R  I  E  S --
     --  Dades dels proveidors de cada una de les ulleres:
+    /* SELECT
+                                                                                                                                                                                                id_ullera,
+                                                                                                                                                                                                ulleres.id_marca,
+                                                                                                                                                                                                marques.nom_marca,
+                                                                                                                                                                                                adreces.*
+                                                                                                                                                                                            FROM
+                                                                                                                                                                                                (
+                                                                                                                                                                                                    (
+                                                                                                                                                                                                        (
+                                                                                                                                                                                                            ulleres
+                                                                                                                                                                                                            INNER JOIN marques ON ulleres.id_marca = marques.id_marca
+                                                                                                                                                                                                        )
+                                                                                                                                                                                                        INNER JOIN proveidors ON proveidors.id_proveidor = marques.id_proveidor
+                                                                                                                                                                                                    )
+                                                                                                                                                                                                    INNER JOIN adreces ON proveidors.id_proveidor = adreces.id_proveidor
+                                                                                                                                                                                                );
+                                                                                                                                                                                            -- Dades de tots els proveidors
+                                                                                                                                                                                            SELECT
+                                                                                                                                                                                                *
+                                                                                                                                                                                            FROM
+                                                                                                                                                                                                proveidors
+                                                                                                                                                                                                INNER JOIN adreces ON proveidors.id_proveidor = adreces.id_proveidor; */
+    /* SELECT Orders.OrderID, Customers.CustomerName
+                                                                                                                                                                                                                FROM Orders
+                                                                                                                                                                                                                INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID; */
+    /* 1. Llista el total de factures d 'un client/a en un període determinat.*/
 SELECT
-    id_ullera,
-    ulleres.id_marca,
-    marques.nom_marca,
-    adreces.*
+    client,
+    nom,
+    primer_cognom,
+    segon_cognom,
+    vendes.num_factura
+FROM
+    vendes
+    INNER JOIN clients ON vendes.client = clients.id_client;
+
+/*Llista els diferents models d'ulleres que ha venut un empleat/da durant un any.*/
+
+SELECT
+    vendes.*
+FROM
+    vendes
+    INNER JOIN empleats ON empleats.id_empleat = vendes.empleat;
+
+/* Llista els diferents proveïdors que han subministrat ulleres venudes amb èxit per l'òptica. */
+
+SELECT
+    proveidors.*
 FROM
     (
         (
             (
-                ulleres
-                INNER JOIN marques ON ulleres.id_marca = marques.id_marca
+                (
+                    (
+                        proveidors
+                        INNER JOIN marques ON marques.id_proveidor = proveidors.id_proveidor
+                    )
+                    inner JOIN marques on marques.id_proveidor = ulleres.id_ullera
+                )
             )
-            INNER JOIN proveidors ON proveidors.id_proveidor = marques.id_proveidor
+            INNER JOIN ulleres ON ulleres.id_ullera = vendes.ullera
         )
-        INNER JOIN adreces ON proveidors.id_proveidor = adreces.id_proveidor
+        INNER JOIN vendes ON vendes.ullera = ullera.id_ullera
     );
--- Dades de tots els proveidors
-SELECT
-    *
-FROM
-    proveidors
-    INNER JOIN adreces ON proveidors.id_proveidor = adreces.id_proveidor;
-    /* SELECT Orders.OrderID, Customers.CustomerName
-                FROM Orders
-                INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID; */
-    /* 1. Llista el total de factures d 'un client/a en un període determinat.
-            2. Llista els diferents models d' ulleres que ha venut un empleat/da durant un any.
-            3. Llista els diferents prove ï dors que han subministrat ulleres venudes amb è xit per l 'òptica. */

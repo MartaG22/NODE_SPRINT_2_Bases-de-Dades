@@ -2,6 +2,8 @@
 
 -- CODEPEN
 
+-- https://www.anerbarrena.com/mysql-like-5657/
+
 DROP DATABASE IF EXISTS CULDAMPOLLA;
 
 CREATE DATABASE CULDAMPOLLA CHARACTER SET utf8mb4;
@@ -607,7 +609,7 @@ WHERE
 /* Llista els diferents proveïdors que han subministrat ulleres venudes amb èxit per l'òptica. */
 
 SELECT
-    DISTINCT proveidors.*
+    DISTINCT proveidors.nom_proveidor
 FROM
     (
         (

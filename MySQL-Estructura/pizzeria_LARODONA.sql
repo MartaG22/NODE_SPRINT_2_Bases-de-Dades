@@ -132,11 +132,60 @@ VALUES
 
 INSERT INTO categoria_pizzes(id_categoriaPizza, nom_categoria)
 VALUES
-    (1, 'vegetal'),
+    (1, 'vegana'),
     (2, 'light'),
-    (3, 'formatge'),
-    (4, 'massa gruixuda');
+    (3, 'extra formatge'),
+    (4, 'massa gruixuda'),
+    (5, 'massa fina')
 
 INSERT INTO productes(id_producte, tipus_producte, id_categoriaPizza, nom, descripcio, preu, imatge)
 VALUES
     (1, 1, 1, 'pizza hawaiana', '');
+
+    /*INSERT INTO botiga (adreça, codi_postal, id_localitat) VALUES ('Carrer de Valencia, 187', '08022', 1);
+INSERT INTO localitats (nom, id_provincia) VALUES ('Barcelona', 1);
+INSERT INTO localitats (nom, id_provincia) VALUES ('Santa Coloma', 1);
+INSERT INTO localitats (nom, id_provincia) VALUES ('Badalona', 1);
+ccccccccINSERT INTO provincia (nom) VALUES ('Barcelona');
+INSERT INTO provincia (nom) VALUES ('Tarragona');
+INSERT INTO provincia (nom) VALUES ('Lleida');
+INSERT INTO provincia (nom) VALUES ('Girona');
+INSERT INTO productes (tipus_producte, nom, descripcio, preu) VALUES ('hamburguesa', 'Clàssica de vedella, formatge i bacó', 'Dins dels ingredients d`aquesta delícia trobem: Pa de motlle, Carn de vedella, Herbes provençals, Mostassa de Dijon, Pebre negre mòlt i oli d`oliva verge.', 9.99);
+INSERT INTO productes (tipus_producte, nom, descripcio, preu) VALUES ('beguda', 'Aigua', 'ampolla d`aigua de mig llitre', 1.50);
+INSERT INTO productes (tipus_producte, nom, descripcio, preu, id_categoria_pizzes) VALUES ('pizza', 'Quatre formatges', 'El formatge fontina, originari de la Vall d`Aosta; el formatge gorgonzola, natural de Milà; el formatge parmesà, originari de la ciutat de Parma; i el formatge mozzarella, nascut a Campània.', 12.99, 1);
+
+
+CREATE TABLE botiga(
+    id_botiga INT(11) NOT NULL AUTO_INCREMENT,
+    adreça VARCHAR(60) NOT NULL,
+    codi_postal VARCHAR(25) NOT NULL,
+    id_localitat INT(11) NOT NULL,
+    PRIMARY KEY(id_botiga),
+    FOREIGN KEY(id_localitat) REFERENCES localitats (id_localitat)
+);
+
+CREATE TABLE comandes(
+    id_comanda INT(11) NOT NULL AUTO_INCREMENT,
+    data_i_hora DATETIME,
+    tipus_comanda ENUM('domicili', 'botiga') NOT NULL,
+    preu DECIMAL(6,2) NOT NULL,
+    id_client INT(11) NOT NULL,
+    id_domicili INT(11),
+    id_botiga INT(11) NOT NULL,
+    id_empleat INT(11) NOT NULL,
+    PRIMARY KEY(id_comanda),
+    FOREIGN KEY(id_client) REFERENCES clients (id_client),
+    FOREIGN KEY(id_domicili) REFERENCES comanda_domicili (id_domicili),
+    FOREIGN KEY(id_botiga) REFERENCES botiga (id_botiga),
+    FOREIGN KEY(id_empleat) REFERENCES empleats (id_empleat)
+);
+
+CREATE TABLE producte_demanat(
+    id_producte_demanat INT(11) NOT NULL AUTO_INCREMENT,
+    id_producte INT(11) NOT NULL,
+    quantitat INT(11) NOT NULL,
+    id_comanda INT(11) NOT NULL,
+    PRIMARY KEY(id_producte_demanat),
+    FOREIGN KEY(id_producte) REFERENCES productes (id_producte),
+    FOREIGN KEY(id_comanda) REFERENCES comandes (id_comanda)
+);

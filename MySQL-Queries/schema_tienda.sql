@@ -60,13 +60,9 @@ INSERT INTO producto VALUES(8, 'Portátil Yoga 520', 559, 2);
 
 INSERT INTO producto VALUES(9, 'Portátil Ideapd 320', 444, 2);
 
-INSERT INTO
-    producto
-VALUES(10, 'Impresora HP Deskjet 3720', 59.99, 3);
+INSERT INTO producto VALUES(10, 'Impresora HP Deskjet 3720', 59.99, 3);
 
-INSERT INTO
-    producto
-VALUES(11, 'Impresora HP Laserjet Pro M26nw', 180, 3);
+INSERT INTO producto VALUES(11, 'Impresora HP Laserjet Pro M26nw', 180, 3);
 
 /*Q  U  E  R  I  E  S  --
 -- 1- Llista el nom de tots els productes que hi ha en la taula producto.*/
@@ -83,6 +79,8 @@ SELECT producto.* FROM producto;
 
 /*/* F A L T E N  - 4 - 5 
 SELECT nombre, precio, precio / 1.07 FROM producto;
+SELECT nombre, precio, precio * 1.13 FROM producto;
+SELECT nombre AS 'nom de producto', precio AS euros, precio * 1.13 AS dolars FROM producto;
 SELECT nombre AS 'Nombre del producto', precio AS 'Precio en Euros', precio / 1.07 AS 'Precio en dólares' FROM producto;  */
 
 -- 6- Llista els noms i els preus de tots els productes de la taula producto, convertint els noms a majúscula.
@@ -309,7 +307,7 @@ ORDER BY
 SELECT DISTINCT fabricante.* FROM fabricante INNER JOIN producto ON producto.codigo_fabricante = fabricante.codigo;
 
 -- 34- Retorna un llistat de tots els fabricants que existeixen en la base de dades, juntament amb els productes que té cadascun d'ells. El llistat haurà de mostrar també aquells fabricants que no tenen productes associats.
-/*SELECT fabricante.codigo, fabricante.nombre, producto.nombre FROM fabricante INNER JOIN producto ON fabricante.codigo = producto.codigo_fabricante ISNULL(NULL, '--') OR  IS NULL ;*/ 
+SELECT fabricante.codigo, fabricante.nombre, producto.nombre FROM fabricante INNER JOIN producto ON fabricante.codigo = producto.codigo_fabricante;
 
 -- 35- Retorna un llistat on només apareguin aquells fabricants que no tenen cap producte associat.
 
@@ -326,7 +324,7 @@ WHERE
 -- 37- Retorna totes les dades dels productes que tenen el mateix preu que el producte més car del fabricant Lenovo. (Sense usar INNER JOIN).
 
 -- 38- Llista el nom del producte més car del fabricant Lenovo.
-
+SELECT producto.nombre FROM producto INNER JOIN fabricante ON fabricante.codigo = producto.codigo_fabricante WHERE fabricante.nombre = 'Lenovo' ORDER BY precio DESC LIMIT 0, 1;
 -- 39- Llista el nom del producte més barat del fabricant Hewlett-Packard.
 
 -- 40- Retorna tots els productes de la base de dades que tenen un preu major o igual al producte més car del fabricant Lenovo.

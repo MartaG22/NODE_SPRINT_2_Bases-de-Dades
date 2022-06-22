@@ -154,7 +154,7 @@ VALUES
 
 INSERT INTO productes(id_producte, tipus_producte, id_categoriaPizza, nom, descripcio, preu, imatge)   
     (1, 'pizza', 5, 'pizza hawaiana', 'Massa fina amb trocets de pinya i pernil dolç, formatge', 9,75,'sfsf');
-INSERT INTO provincia (nom) VALUES (1,'Barcelona'), (2, 'Tarragona'), (3, 'Lleida'), (4, 'Girona');
+INSERT INTO provincia (id_provincia, nom_provincia) VALUES (1,'Barcelona'), (2, 'Tarragona'), (3, 'Lleida'), (4, 'Girona');
     /*INSERT INTO botiga (adreça, codi_postal, id_localitat) VALUES ('Carrer de Valencia, 187', '08022', 1);*/
 
 

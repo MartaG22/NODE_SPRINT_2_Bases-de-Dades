@@ -323,8 +323,10 @@ SELECT grado.nombre, COUNT(*) AS numAsignaturas FROM grado INNER JOIN asignatura
 -- 10- Retorna totes les dades de l'alumne més jove.
 SELECT persona.* FROM persona WHERE tipo = 'alumno' ORDER BY fecha_nacimiento DESC LIMIT 1;
 
-SELECT species, AVG(age) FROM pets GROUP BY species HAVING AVG(age) > 2;
 -- 11- Retorna un llistat amb els professors que tenen un departament associat i que no imparteixen cap assignatura.
+/*SELECT persona.nombre, apellido1, apellido2 FROM ((persona INNER JOIN profesor ON profesor.id_profesor = persona.id) INNER JOIN departamento ON departamento.id  = profesor.id_departamento) INNER JOIN asignatura ON asignatura.id_profesor = profesor.id_profesor WHERE asignatura.id IS NULL; */
+
+
 
 
 

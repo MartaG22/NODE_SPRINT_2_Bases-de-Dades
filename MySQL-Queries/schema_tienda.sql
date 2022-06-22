@@ -77,16 +77,15 @@ SELECT nombre, precio FROM producto;
 
 SELECT producto.* FROM producto;
 
-/*/* F A L T E N  - 4 - 5 
-SELECT nombre, precio, precio / 1.07 FROM producto;
-SELECT nombre, precio, precio * 1.13 FROM producto;
-SELECT nombre AS 'nom de producto', precio AS euros, precio * 1.13 AS dolars FROM producto;
-SELECT nombre AS 'Nombre del producto', precio AS 'Precio en Euros', precio / 1.07 AS 'Precio en dólares' FROM producto;  */
+-- F A L T E N  - 4 - 5 
+
+-- 4- Llista el nom dels productes, el preu en euros i el preu en dòlars estatunidencs (USD).
+SELECT nombre, precio, ROUND((precio / 1.05),2) FROM producto;
+
+-- 5- Llista el nom dels productes, el preu en euros i el preu en dòlars estatunidencs (USD). Utilitza els següents àlies per a les columnes: nom de producto, euros, dòlars.
+SELECT nombre AS "Nom del producte", precio AS "Preu en Euros", ROUND((precio / 1.05),2) AS "Preu en Dòlars" FROM producto;
 
 -- 6- Llista els noms i els preus de tots els productes de la taula producto, convertint els noms a majúscula.
-
--- SELECT producto.nombre, producto.precio FROM producto
-
 SELECT UPPER(nombre), precio FROM producto;
 
 -- 7- Llista els noms i els preus de tots els productes de la taula producto, convertint els noms a minúscula.

@@ -1,8 +1,38 @@
-DROP DATABASE IF EXISTS PIZZERIA_MG;
+DROP DATABASE IF EXISTS PIZZERIA_LARODONA;
 
-CREATE DATABASE PIZZERIA_MG CHARACTER SET utf8mb4;
+CREATE DATABASE PIZZERIA_LARODONA CHARACTER SET utf8mb4;
 
-USE PIZZERIA_MG;
+USE PIZZERIA_LARODONA;
+
+
+DROP TABLE IF EXISTS provincia;
+
+CREATE TABLE provincia(
+    id_provincia INT NOT NULL AUTO_INCREMENT,
+    nom_provincia VARCHAR(50),
+    PRIMARY KEY (id_provincia)
+);
+
+DROP TABLE IF EXISTS localitats;
+
+CREATE TABLE localitats(
+    id_localitat INT NOT NULL AUTO_INCREMENT,
+    nom_localitat VARCHAR(50),
+    id_provincia INT NOT NULL,
+    PRIMARY KEY (id_localitat),
+    FOREIGN KEY (id_provincia) REFERENCES provincia(id_provincia)
+);
+
+
+DROP TABLE IF EXISTS botiga;
+CREATE TABLE botiga(
+    id_botiga INT(11) NOT NULL AUTO_INCREMENT,
+    adreza VARCHAR(60) NOT NULL,
+    codi_postal VARCHAR(25) NOT NULL,
+    id_localitat INT(11) NOT NULL,
+    PRIMARY KEY(id_botiga),
+    FOREIGN KEY(id_localitat) REFERENCES localitats (id_localitat)
+);
 
 DROP TABLE IF EXISTS clients;
 
@@ -84,23 +114,7 @@ CREATE TABLE comandes(
     FOREIGN KEY (id_client) REFERENCES clients(id_client)
 );
 
-DROP TABLE IF EXISTS provincia;
 
-CREATE TABLE provincia(
-    id_provincia INT NOT NULL AUTO_INCREMENT,
-    nom_provincia VARCHAR(50),
-    PRIMARY KEY (id_provincia)
-);
-
-DROP TABLE IF EXISTS localitat;
-
-CREATE TABLE localitat(
-    id_localitat INT NOT NULL AUTO_INCREMENT,
-    nom_localitat VARCHAR(50),
-    id_provincia INT NOT NULL,
-    PRIMARY KEY (id_localitat),
-    FOREIGN KEY (id_provincia) REFERENCES provincia(id_provincia)
-);
 INSERT INTO clients (id_client, nom, primer_cognom, segon_cognom, telefon, correu_electronic, data_registre)
 VALUES
     (1, 'Irene', 'García', 'Fernandez', 933555334, 'irenegf@yahoo.es', '2012-12-29'),
@@ -136,33 +150,25 @@ VALUES
     (2, 'light'),
     (3, 'extra formatge'),
     (4, 'massa gruixuda'),
-    (5, 'massa fina')
+    (5, 'massa fina');
 
-INSERT INTO productes(id_producte, tipus_producte, id_categoriaPizza, nom, descripcio, preu, imatge)
-VALUES
-    (1, 1, 1, 'pizza hawaiana', '');
+INSERT INTO productes(id_producte, tipus_producte, id_categoriaPizza, nom, descripcio, preu, imatge)   
+    (1, 'pizza', 5, 'pizza hawaiana', 'Massa fina amb trocets de pinya i pernil dolç, formatge', 9,75,'sfsf');
+INSERT INTO provincia (nom) VALUES (1,'Barcelona'), (2, 'Tarragona'), (3, 'Lleida'), (4, 'Girona');
+    /*INSERT INTO botiga (adreça, codi_postal, id_localitat) VALUES ('Carrer de Valencia, 187', '08022', 1);*/
 
-    /*INSERT INTO botiga (adreça, codi_postal, id_localitat) VALUES ('Carrer de Valencia, 187', '08022', 1);
-INSERT INTO localitats (nom, id_provincia) VALUES ('Barcelona', 1);
-INSERT INTO localitats (nom, id_provincia) VALUES ('Santa Coloma', 1);
-INSERT INTO localitats (nom, id_provincia) VALUES ('Badalona', 1);
-ccccccccINSERT INTO provincia (nom) VALUES ('Barcelona');
-INSERT INTO provincia (nom) VALUES ('Tarragona');
-INSERT INTO provincia (nom) VALUES ('Lleida');
-INSERT INTO provincia (nom) VALUES ('Girona');
-INSERT INTO productes (tipus_producte, nom, descripcio, preu) VALUES ('hamburguesa', 'Clàssica de vedella, formatge i bacó', 'Dins dels ingredients d`aquesta delícia trobem: Pa de motlle, Carn de vedella, Herbes provençals, Mostassa de Dijon, Pebre negre mòlt i oli d`oliva verge.', 9.99);
+
+INSERT INTO localitats (id_localitat, nom_localitat, id_provincia)
+VALUES 
+    (1, 'Barcelona', 1)
+    (2, 'Santa Coloma', 1),
+    (3, 'Badalona', 1);
+
+/*INSERT INTO productes (tipus_producte, nom, descripcio, preu) VALUES ('hamburguesa', 'Clàssica de vedella, formatge i bacó', 'Dins dels ingredients d`aquesta delícia trobem: Pa de motlle, Carn de vedella, Herbes provençals, Mostassa de Dijon, Pebre negre mòlt i oli d`oliva verge.', 9.99);
 INSERT INTO productes (tipus_producte, nom, descripcio, preu) VALUES ('beguda', 'Aigua', 'ampolla d`aigua de mig llitre', 1.50);
 INSERT INTO productes (tipus_producte, nom, descripcio, preu, id_categoria_pizzes) VALUES ('pizza', 'Quatre formatges', 'El formatge fontina, originari de la Vall d`Aosta; el formatge gorgonzola, natural de Milà; el formatge parmesà, originari de la ciutat de Parma; i el formatge mozzarella, nascut a Campània.', 12.99, 1);
 
 
-CREATE TABLE botiga(
-    id_botiga INT(11) NOT NULL AUTO_INCREMENT,
-    adreça VARCHAR(60) NOT NULL,
-    codi_postal VARCHAR(25) NOT NULL,
-    id_localitat INT(11) NOT NULL,
-    PRIMARY KEY(id_botiga),
-    FOREIGN KEY(id_localitat) REFERENCES localitats (id_localitat)
-);
 
 CREATE TABLE comandes(
     id_comanda INT(11) NOT NULL AUTO_INCREMENT,

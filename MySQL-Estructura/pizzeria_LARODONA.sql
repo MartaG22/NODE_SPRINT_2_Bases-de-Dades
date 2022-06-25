@@ -140,25 +140,6 @@ CREATE TABLE entrega_comanda(
 );
 
 
-
- /* CREATE TABLE comandes(
-    id_comanda INT(11) NOT NULL AUTO_INCREMENT,
-    data_i_hora DATETIME,
-    tipus_comanda ENUM('domicili', 'botiga') NOT NULL,
-    preu DECIMAL(6,2) NOT NULL,
-    id_client INT(11) NOT NULL,
-    id_domicili INT(11),
-    id_botiga INT(11) NOT NULL,
-    id_empleat INT(11) NOT NULL,
-    PRIMARY KEY(id_comanda),
-    FOREIGN KEY(id_client) REFERENCES clients (id_client),
-    FOREIGN KEY(id_domicili) REFERENCES comanda_domicili (id_domicili),
-    FOREIGN KEY(id_botiga) REFERENCES botiga (id_botiga),
-    FOREIGN KEY(id_empleat) REFERENCES empleats (id_empleat)
-);*/
-
-
-
 INSERT INTO categoria_pizzes(id_categoriaPizza, nom_categoria)
 VALUES
     (1, 'vegana'),

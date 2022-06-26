@@ -1,9 +1,3 @@
---  cassidy williams
-
--- CODEPEN
-
--- https://www.anerbarrena.com/mysql-like-5657/
-
 DROP DATABASE IF EXISTS CULDAMPOLLA;
 
 CREATE DATABASE CULDAMPOLLA CHARACTER SET utf8mb4;
@@ -18,10 +12,9 @@ CREATE TABLE empleats(
     primer_cognom VARCHAR(50) NOT NULL,
     segon_cognom VARCHAR(50) NOT NULL,
     NIF VARCHAR(9) NOT NULL,
-    /* adreza_empleat INT NOT NULL, */
     telefon INT NOT NULL,
     correu_electronic VARCHAR(60),
-    PRIMARY KEY (id_empleat) -- FOREIGN KEY (adreza_empleat) REFERENCES adreces(id_adreza)
+    PRIMARY KEY (id_empleat)
 );
 
 DROP TABLE IF EXISTS proveidors;
@@ -29,11 +22,10 @@ DROP TABLE IF EXISTS proveidors;
 CREATE TABLE proveidors (
     id_proveidor INT NOT NULL AUTO_INCREMENT,
     nom_proveidor VARCHAR(60) NOT NULL,
-    /* adreza_proveidor INT NOT NULL, */
     telefon INT NOT NULL,
     fax INT NOT NULL,
     NIF VARCHAR(9) NOT NULL,
-    PRIMARY KEY (id_proveidor) -- FOREIGN KEY (adreza_proveidor) REFERENCES adreces(id_adreza)
+    PRIMARY KEY (id_proveidor)
 );
 
 DROP TABLE IF EXISTS marques;
@@ -51,7 +43,6 @@ DROP TABLE IF EXISTS ulleres;
 CREATE TABLE ulleres (
     id_ullera INT NOT NULL,
     id_marca SMALLINT NOT NULL,
-    /* marca VARCHAR(50) NOT NULL, */
     model VARCHAR(50) NOT NULL,
     graduacio_esq DECIMAL(3, 2) NOT NULL,
     graduacio_der DECIMAL(3, 2) NOT NULL,
@@ -70,13 +61,11 @@ CREATE TABLE clients (
     nom VARCHAR(50) NOT NULL,
     primer_cognom VARCHAR(50) NOT NULL,
     segon_cognom VARCHAR(50) NOT NULL,
-    /* adreza_client INT NOT NULL, */
     telefon INT NOT NULL,
     correu_electronic VARCHAR(60),
     data_registre DATE NOT NULL,
     recomanacio INT,
     PRIMARY KEY (id_client),
-    -- FOREIGN KEY (adreza_client) REFERENCES adreces(id_adreza),
     FOREIGN KEY (recomanacio) REFERENCES clients(id_client)
 );
 
@@ -119,7 +108,6 @@ INSERT INTO
     proveidors(
         id_proveidor,
         nom_proveidor,
-        /* adreza_proveidor, */
         telefon,
         fax,
         NIF
@@ -128,7 +116,6 @@ VALUES
     (
         1,
         'les_millors_ulleres',
-        /* 1, */
         973823422,
         973563456,
         'G34678954'
@@ -136,7 +123,6 @@ VALUES
     (
         2,
         'ulleres_molones',
-        /* 2, */
         923459644,
         923459648,
         'H14485394'
@@ -144,7 +130,6 @@ VALUES
     (
         3,
         'best_glasses',
-        /* 3, */
         954778565,
         953886748,
         'M74835456'
@@ -163,7 +148,6 @@ INSERT INTO
         nom,
         primer_cognom,
         segon_cognom,
-        /* adreza_client, */
         telefon,
         correu_electronic,
         data_registre,
@@ -175,7 +159,6 @@ VALUES
         'Irene',
         'García',
         'Fernandez',
-        /* 4, */
         933555334,
         'irenegf@yahoo.es',
         '2012-12-29',
@@ -186,7 +169,6 @@ VALUES
         'Francesc',
         'Romero',
         'Gazquez',
-        /* 5, */
         936547654,
         'francesc@gmail.com',
         '2015-05-17',
@@ -197,7 +179,6 @@ VALUES
         'Jordi',
         'Grau',
         'Calmell',
-        /* 6, */
         932264535,
         'jordigc@gmail.com',
         '2017-09-26',
@@ -211,7 +192,6 @@ INSERT INTO
         primer_cognom,
         segon_cognom,
         NIF,
-        /* adreza_empleat, */
         telefon,
         correu_electronic
     )
@@ -221,7 +201,6 @@ VALUES(
         'Rodríguez',
         'Estévez',
         '43675456T',
-        /* 7, */
         933556753,
         'montse@hotmail.com'
     ),
@@ -231,7 +210,6 @@ VALUES(
         'Bosch',
         'Giner',
         '24535435P',
-        /* 8, */
         935739534,
         'joaquim.bosch@gmail.com'
     ),
@@ -241,14 +219,12 @@ VALUES(
         'Gómez',
         'Sanjuan',
         '84734534K',
-        /* 9, */
         934654567,
         'olga.san@gmail.com'
     );
 
 INSERT INTO
     adreces(
-        /* id_adreza, */
         id_empleat,
         id_proveidor,
         id_client,
@@ -395,7 +371,6 @@ INSERT INTO
     ulleres (
         id_ullera,
         id_marca,
-        /* marca, */
         model,
         graduacio_esq,
         graduacio_der,
@@ -408,7 +383,6 @@ VALUES
     (
         '1122334455',
         543,
-        /* 'Ray Ban', */
         '0RB3447',
         1.25,
         1.50,
@@ -420,7 +394,6 @@ VALUES
     (
         '1234567890',
         345,
-        /* 'Hugo Boss', */
         'BOSS0680/N',
         0.75,
         1.00,
@@ -432,7 +405,6 @@ VALUES
     (
         '1566778844',
         743,
-        /* 'Prada', */
         'PR-06YS-09Q5S0',
         2.00,
         1.75,
@@ -444,7 +416,6 @@ VALUES
     (
         '1453467565',
         234,
-        /* 'Etnia Barcelona', */
         'QUINN-SUN/HVBL',
         0.75,
         1.25,
@@ -456,7 +427,6 @@ VALUES
     (
         '1353345534',
         342,
-        /* 'Tous', */
         'STOA04 0GGD',
         0.00,
         1.00,
@@ -501,7 +471,6 @@ VALUES
     (
         '1456587988',
         234,
-        /* 'Etnia Barcelona', */
         'SUN/HVBL-YEL',
         0.75,
         1.00,
@@ -513,7 +482,6 @@ VALUES
     (
         '1209876547',
         345,
-        /* 'Hugo Boss', */
         'BOSN0500J/B',
         0.75,
         2.00,
@@ -542,37 +510,10 @@ VALUES
     (8, 'F15-857', '1576455754', 2, 1, '2015-12-29'),
     (9, 'F10-544', '1456587988', 1, 1, '2014-11-15'),
     (10, 'F20-239', '1209876547', 2, 3, '2020-09-23');
--- Q  U  E  R  I  E  S --
-    --  Dades dels proveidors de cada una de les ulleres:
-    -- SELECT
-    --     id_ullera,
-    --     ulleres.id_marca,
-    --     marques.nom_marca,
-    --     adreces.*
-    -- FROM
-    --     (
-    --         (
-    --             (
-    --                 ulleres
-    --                 INNER JOIN marques ON ulleres.id_marca = marques.id_marca
-    --             )
-    --             INNER JOIN proveidors ON proveidors.id_proveidor = marques.id_proveidor
-    --         )
-    --         INNER JOIN adreces ON proveidors.id_proveidor = adreces.id_proveidor
-    --     );
-    -- -- Dades de tots els proveidors
-    -- SELECT
-    --     *
-    -- FROM
-    --     proveidors
-    --     INNER JOIN adreces ON proveidors.id_proveidor = adreces.id_proveidor;
-    -- SELECT
-    --     Orders.OrderID,
-    --     Customers.CustomerName
-    -- FROM
-    --     Orders
-    --     INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
-    -- Q  U  E  R  I  E  S     B U E N A S --
+
+
+
+-- Q  U  E  R  I  E  S      --
     /* 1. Llista el total de factures d 'un client/a en un període determinat.*/
 SELECT
     client,

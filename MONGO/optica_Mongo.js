@@ -3,6 +3,9 @@
 // https://www.tutorialesprogramacionya.com/mongodbya/detalleconcepto.php?punto=26&codigo=26&inicio=20
 // https://www.mongodb.com/docs/manual/
 
+
+// npm install mongodb
+
 use('optica_CULDAMPOLLA');
 
 db.dropDatabase();
@@ -64,3 +67,26 @@ db.clients.insertMany([
         recomanacio:
     }
 ])
+
+{
+    "_id": {
+      "$oid": "62b983e905342e13b2013384"
+          "nom": 'Irene',
+          "primer_cognom": 'García',
+          "segon_cognom": 'Fernandez',
+          "adreza": {
+              "carrer": 'Carrer Còrsega',
+              "numero": 458,
+              "pis": 3,
+              "porta": 3,
+              "ciutat": 'Barcelona',
+              "codi_postal": 08025
+              "pais": 'Espanya'
+          },
+          "telefon": 933555334,
+          "correu_electronic":'irenegf@yahoo.es',
+          "data_registre":'2012-12-29'
+      }
+  
+    }
+  }

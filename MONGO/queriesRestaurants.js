@@ -1,3 +1,5 @@
+// https://geekflare.com/es/mongodb-queries-examples/   MUY BUENO!!!
+
 use(restaurantsMongo);
 
 
@@ -59,7 +61,7 @@ db.restaurants.find({$or: [{"borough": "Staten Island"}, {"borough": "Queens"}, 
 db.restaurants.find({$nor: [{"borough": "Staten Island"}, {"borough": "Queens"}, {"borough": "Bronx"}, {"borough": "Brooklyn"}]},{"name":1, "restaurant_id":1, "borough":1, "cuisine":1, "_id":0});
 
 // 20. Escriu una consulta per trobar el restaurant_id, name, borough i cuisine per a aquells restaurants que aconsegueixin un marcador que no és més de 10.
-db.restaurants.find(({"grades.score": {$lte: 10}}), {"name":1, "restaurant_id":1, "borough":1, "cuisine":1, "_id":0});
+// db.restaurants.find(({"grades.score": {$lte: 10}}), {"name":1, "restaurant_id":1, "borough":1, "grades.score":1, "cuisine":1, "_id":0});
 
 // 21. Escriu una consulta per trobar el restaurant_id, name, borough i cuisine per a aquells restaurants que preparen peix excepte 'American' i 'Chinees' o el name del restaurant comença amb lletres 'Wil'.
 db.restaurants.find({$or: [{"cuisine": ("Seafood", "American", "Chinese")}, {"name": {$regex: /^Wil/}}]}, {"name":1, "restaurant_id":1, "borough":1, "cuisine":1, "_id":0});
@@ -74,9 +76,10 @@ db.restaurants.find( {'date': {$eq:ISODate('2014-08-11T00:00:00Z')}} , {'restaur
 
 
 // 23. Escriu una consulta per trobar el restaurant_id, name i grades per a aquells restaurants on el 2n element de varietat de graus conté un grau de "A" i marcador 9 sobre un ISODate "2014-08-11T00:00:00Z".
+// db.restaurants.find({"grades.grade.2": ("A")}, {"restaurant_id":1, "name":1, "grades":1});
+
 // 24. Escriu una consulta per trobar el restaurant_id, name, adreça i ubicació geogràfica per a aquells restaurants on el segon element del array coord conté un valor que és més de 42 i fins a 52.
-
-
+db.restaurants.find({"address.coord.1": {$gt: 42, $lte: 52}},{"restaurant_id":1, "name":1, "address":1});
 
 // 25. Escriu una consulta per organitzar el nom dels restaurants en ordre ascendent juntament amb totes les columnes.
 db.restaurants.find({}).sort({"cuisine": 1});
@@ -89,8 +92,8 @@ db.restaurants.find({},{"cuisine": 1, "borough": 1}).sort({"cuisine": 1, "boroug
 
 // 28. Escriu una consulta per saber tant si totes les direccions contenen el carrer o no.
 // 29. Escriu una consulta que seleccionarà tots els documents en la col·lecció de restaurants on el valor del camp coord és Double.
-db.restaurants.find({},{});
-db.restaurants.find( {'address.coord': {$type: 'double'}}, {'name': 1,} );
+// db.restaurants.find({},{});
+// db.restaurants.find( {'address.coord': {$type: 'double'}}, {'name': 1,} );
 
 
 // 30. Escriu una consulta que seleccionarà el restaurant_id, name i grade per a aquells restaurants que retornin 0 com a resta després de dividir el marcador per 7.

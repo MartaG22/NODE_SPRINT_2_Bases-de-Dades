@@ -1,0 +1,10 @@
+[{
+  "_id": {
+    "$oid": "62b9858405342e13b2013386"
+  },
+  "nom": "Irene",
+  "primer_cognom": "\"García",
+  "telefon": "933555334",
+  "correu_electronic": "irenegf@yahoo.es",
+  "data_registre": "2012-12-29"
+}]

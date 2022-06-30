@@ -14,8 +14,6 @@
 
 // npm install mongodb
 
-
-
 // use('optica_CULDAMPOLLA');
 
 // db.dropDatabase();
@@ -52,34 +50,43 @@ db.proveidors.insertMany(
                         "tipus_montura": 'metàl·lica',
                         "color_montura": 'daurat',
                         "color_vidres": 'verd',
-                        "preu": 101.95
+                        "preu": 101.95,
+                        "venedor_id": "000000000000000000000030",
+                        "client_id": "000000000000000000000005"
                     }]
                 },
                 {
                     "_id": ObjectId("000000000000000000000009"),
                     "marca": 'Hugo Boss',
-                    "ullera": [{
-                        "_id": ObjectId("000000000000000000000021"),
-                        "id_ullera": '1234567890',
-                        "model": 'BOSS0680/N',
-                        "graduacio_esq": 0.75,
-                        "graduacio_der": 1.00,
-                        "tipus_montura": 'pasta',
-                        "color_montura": 'negre',
-                        "color_vidres": 'transparent',
-                        "preu": 145.00
-                    }],
-                    "ullera": [{
-                        "_id": ObjectId("000000000000000000000022"),
-                        "id_ullera": '1209876547',
-                        "model": 'BOSN0500J/B',
-                        "graduacio_esq": 1.75,
-                        "graduacio_der": 2.00,
-                        "tipus_montura": 'flotant',
-                        "color_montura": 'negre',
-                        "color_vidres": 'transparent',
-                        "preu": 145.00
-                    }]
+                    "ulleres": [
+                        {
+                            "_id": ObjectId("000000000000000000000021"),
+                            "id_ullera": '1234567890',
+                            "model": 'BOSS0680/N',
+                            "graduacio_esq": 0.75,
+                            "graduacio_der": 1.00,
+                            "tipus_montura": 'pasta',
+                            "color_montura": 'negre',
+                            "color_vidres": 'transparent',
+                            "preu": 145.00,
+                            "venedor_id": "000000000000000000000032",
+                            "client_id": "000000000000000000000005"
+
+                        },
+                        {
+                            "_id": ObjectId("000000000000000000000022"),
+                            "id_ullera": '1209876547',
+                            "model": 'BOSN0500J/B',
+                            "graduacio_esq": 1.75,
+                            "graduacio_der": 2.00,
+                            "tipus_montura": 'flotant',
+                            "color_montura": 'negre',
+                            "color_vidres": 'transparent',
+                            "preu": 145.00,
+                            "venedor_id": "000000000000000000000031",
+                            "client_id": "000000000000000000000007"
+                        }
+                    ]
                 }
             ]
         },
@@ -101,7 +108,7 @@ db.proveidors.insertMany(
             // (743, 'Prada', 2),
             "marques": [
                 {
-                    "_id": ObjectId("0000000000000000000000010"),
+                    "_id": ObjectId("000000000000000000000010"),
                     "marca": 'Prada',
                     "ulleres": [{
                         "_id": ObjectId("000000000000000000000023"),
@@ -112,12 +119,14 @@ db.proveidors.insertMany(
                         "tipus_montura": 'pasta',
                         "color_montura": 'negre',
                         "color_vidres": 'negre fumat',
-                        "preu": 218.95
+                        "preu": 218.95,
+                        "venedor_id": "000000000000000000000031",
+                        "client_id": "000000000000000000000006"
                     }]
                 },
-            // (342, 'Tous', 2),
+                // (342, 'Tous', 2),
                 {
-                    "_id": ObjectId("0000000000000000000000011"),
+                    "_id": ObjectId("000000000000000000000011"),
                     "marca": 'Tous',
                     "ulleres": [{
                         "_id": ObjectId("000000000000000000000024"),
@@ -128,12 +137,14 @@ db.proveidors.insertMany(
                         "tipus_montura": 'metàl·lica',
                         "color_montura": 'coure',
                         "color_vidres": 'verd',
-                        "preu": 180.25
+                        "preu": 180.25,
+                        "venedor_id": "000000000000000000000031",
+                        "client_id": "000000000000000000000007"
                     }]
                 },
-            // (234, 'Etnia Barcelona', 2),
+                // (234, 'Etnia Barcelona', 2),
                 {
-                    "_id": ObjectId("0000000000000000000000012"),
+                    "_id": ObjectId("000000000000000000000012"),
                     "marca": 'Etnia Barcelona',
                     "ulleres": [{
                         "_id": ObjectId("000000000000000000000025"),
@@ -144,7 +155,9 @@ db.proveidors.insertMany(
                         "tipus_montura": 'pasta',
                         "color_montura": 'groc amb ratlles',
                         "color_vidres": 'groc',
-                        "preu": 190.50
+                        "preu": 190.50,
+                        "venedor_id": "000000000000000000000033",
+                        "client_id": "000000000000000000000006"
                     }]
                 }
             ]
@@ -178,14 +191,16 @@ db.proveidors.insertMany(
                         "tipus_montura": 'flotant',
                         "color_montura": 'platejat',
                         "color_vidres": 'transparents',
-                        "preu": 180.25
+                        "preu": 180.25,
+                        "venedor_id": "000000000000000000000032",
+                        "client_id": "000000000000000000000007"
                     }]
                 },
-            // (877, 'Ralph Lauren', 3);
+                // (877, 'Ralph Lauren', 3);
                 {
                     "_id": ObjectId("000000000000000000000014"),
                     "marca": 'Ralph Lauren',
-                    "ullera": [{
+                    "ulleres": [{
                         "_id": ObjectId("000000000000000000000027"),
                         "id_ullera": '1454556464',
                         "model": 'RL9033/938',
@@ -194,7 +209,9 @@ db.proveidors.insertMany(
                         "tipus_montura": 'metàl·lica',
                         "color_montura": 'negre',
                         "color_vidres": 'transparent',
-                        "preu": 130.50
+                        "preu": 130.50,
+                        "venedor_id": "000000000000000000000033",
+                        "client_id": "000000000000000000000005"
                     }]
                 }
             ]
@@ -217,7 +234,7 @@ db.proveidors.insertMany(
             // (323, 'Carolina Herrera', 3),
             "marques": [
                 {
-                    "_id": ObjectId("0000000000000000000000015"),
+                    "_id": ObjectId("000000000000000000000015"),
                     "marca": 'Carolina Herrera',
                     "ulleres": [{
                         "_id": ObjectId("000000000000000000000028"),
@@ -228,7 +245,9 @@ db.proveidors.insertMany(
                         "tipus_montura": 'flotant',
                         "color_montura": 'negre',
                         "color_vidres": 'transparents',
-                        "preu": 220.85
+                        "preu": 220.85,
+                        "venedor_id": "000000000000000000000032",
+                        "client_id": "000000000000000000000006"
                     }]
                 }
             ]
@@ -237,8 +256,8 @@ db.proveidors.insertMany(
 ),
 
 
-// db.createCollection(clients);
-db.clients.drop();
+    // db.createCollection(clients);
+    db.clients.drop();
 db.clients.insertMany([
     {
         "_id": ObjectId("000000000000000000000005"),
@@ -292,5 +311,66 @@ db.clients.insertMany([
         "telefon": 932264535,
         "correu_electronic": 'jordigc@gmail.com',
         "data_registre": '2017-09-26',
+        "recomanacio_id": "000000000000000000000005"
     }
-])
+]);
+
+
+db.empleats.drop();
+db.empleats.insertMany(
+    [
+        {
+            "_id": ObjectId("000000000000000000000030"),
+            "nom": 'Montse',
+            "primer_cognom": 'Rodríguez',
+            "segon_cognom": 'Estévez',
+            "nif": '43675456T',
+            "adreza": {
+                "carrer": 'Carrer Reina Amalia',
+                "numero": 31,
+                "pis": 'Bx.',
+                "ciutat": 'Barcelona',
+                "codi_postal": 08013,
+                "pais": 'Espanya'
+            },
+            "telefon": 933556753,
+            "correu_electronic": 'montse@hotmail.com'
+        },
+        {
+            "_id": ObjectId("000000000000000000000031"),
+            "nom": 'Joaquim',
+            "primer_cognom": 'Bosch',
+            "segon_cognom": 'Giner',
+            "nif": '24535435P',
+            "adreza": {
+                "carrer": 'Carrer Argenteria',
+                "numero": 25,
+                "pis": 2,
+                "porta": 1,
+                "ciutat": 'Barcelona',
+                "codi_postal": 08003,
+                "pais": 'Espanya'
+            },
+            "telefon": 935739534,
+            "correu_electronic": 'joaquim.bosch@gmail.com'
+        },
+        {
+            "_id": ObjectId("000000000000000000000032"),
+            "nom": 'Olga',
+            "primer_cognom": 'Gómez',
+            "segon_cognom": 'Sanjuan',
+            "nif": '84734534K',
+            "adreza": {
+                "carrer": 'Carrer Sant Miquel',
+                "numero": 95,
+                "pis": 3,
+                "porta": 2,
+                "ciutat": 'Masnou',
+                "codi_postal": 08320,
+                "pais": 'Espanya'
+            },
+            "telefon": 934654567,
+            "correu_electronic": 'olga.san@gmail.com'
+        }
+    ]
+);

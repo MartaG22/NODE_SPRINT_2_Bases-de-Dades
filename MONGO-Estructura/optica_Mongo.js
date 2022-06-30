@@ -44,7 +44,7 @@ db.proveidors.insertMany(
                     "_id": ObjectId("000000000000000000000008"),
                     "marca": 'Ray Ban',
                     "ulleres": [{
-                        "_id": ObjectId("000000000000000000000010"),
+                        "_id": ObjectId("000000000000000000000020"),
                         "id_ullera": '1122334455',
                         "model": '0RB3447',
                         "graduacio_esq": 1.25,
@@ -59,7 +59,7 @@ db.proveidors.insertMany(
                     "_id": ObjectId("000000000000000000000009"),
                     "marca": 'Hugo Boss',
                     "ullera": [{
-                        "_id": ObjectId("000000000000000000000011"),
+                        "_id": ObjectId("000000000000000000000021"),
                         "id_ullera": '1234567890',
                         "model": 'BOSS0680/N',
                         "graduacio_esq": 0.75,
@@ -68,62 +68,168 @@ db.proveidors.insertMany(
                         "color_montura": 'negre',
                         "color_vidres": 'transparent',
                         "preu": 145.00
+                    }],
+                    "ullera": [{
+                        "_id": ObjectId("000000000000000000000022"),
+                        "id_ullera": '1209876547',
+                        "model": 'BOSN0500J/B',
+                        "graduacio_esq": 1.75,
+                        "graduacio_der": 2.00,
+                        "tipus_montura": 'flotant',
+                        "color_montura": 'negre',
+                        "color_vidres": 'transparent',
+                        "preu": 145.00
+                    }]
+                }
+            ]
+        },
+        {
+            "_id": ObjectId("000000000000000000000002"),
+            "nom_proveidor": 'ulleres_molones',
+            "telefon": 923459644,
+            "fax": 923459648,
+            "nif": 'H14485394',
+            "adreza": {
+                "carrer": 'Carrer de Brujas',
+                "numero": 101,
+                "pis": 1,
+                "porta": "A",
+                "ciutat": 'Sabadell',
+                "codi_postal": 08202,
+                "pais": 'Espanya'
+            },
+            // (743, 'Prada', 2),
+            "marques": [
+                {
+                    "_id": ObjectId("0000000000000000000000010"),
+                    "marca": 'Prada',
+                    "ulleres": [{
+                        "_id": ObjectId("000000000000000000000023"),
+                        "id_ullera": '1566778844',
+                        "model": 'PR-06YS-09Q5S0',
+                        "graduacio_esq": 2.00,
+                        "graduacio_der": 1.75,
+                        "tipus_montura": 'pasta',
+                        "color_montura": 'negre',
+                        "color_vidres": 'negre fumat',
+                        "preu": 218.95
                     }]
                 },
-
+            // (342, 'Tous', 2),
                 {
-                    "_id": ObjectId("000000000000000000000002"),
-                    "nom_proveidor": 'ulleres_molones',
-                    "telefon": 923459644,
-                    "fax": 923459648,
-                    "nif": 'H14485394',
-                    "adreza": {
-                        "carrer": 'Carrer de Brujas',
-                        "numero": 101,
-                        "pis": 1,
-                        "porta": "A",
-                        "ciutat": 'Sabadell',
-                        "codi_postal": 08202,
-                        "pais": 'Espanya'
-                    }
-                    // (743, 'Prada', 2),
-                    // (342, 'Tous', 2),
-                    // (234, 'Etnia Barcelona', 2),
+                    "_id": ObjectId("0000000000000000000000011"),
+                    "marca": 'Tous',
+                    "ulleres": [{
+                        "_id": ObjectId("000000000000000000000024"),
+                        "id_ullera": '1353345534',
+                        "model": 'STOA04 0GGD',
+                        "graduacio_esq": 0.00,
+                        "graduacio_der": 1.00,
+                        "tipus_montura": 'metàl·lica',
+                        "color_montura": 'coure',
+                        "color_vidres": 'verd',
+                        "preu": 180.25
+                    }]
                 },
+            // (234, 'Etnia Barcelona', 2),
                 {
-                    "_id": ObjectId("000000000000000000000003"),
-                    "nom_proveidor": 'best_glasses',
-                    "telefon": 954778565,
-                    "fax": 953886748,
-                    "nif": 'M74835456',
-                    "adreza": {
-                        "carrer": 'Dumbarton Road',
-                        "numero": 305,
-                        "pis": 4,
-                        "porta": 1,
-                        "ciutat": 'Glasgow',
-                        "codi_postal": 55555,
-                        "pais": 'United Kingdom'
-                    }
-                    // (235, 'Timberland', 3),
-                    // (877, 'Ralph Lauren', 3);
+                    "_id": ObjectId("0000000000000000000000012"),
+                    "marca": 'Etnia Barcelona',
+                    "ulleres": [{
+                        "_id": ObjectId("000000000000000000000025"),
+                        "id_ullera": '1456587988',
+                        "model": 'SUN/HVBL-YEL',
+                        "graduacio_esq": 0.75,
+                        "graduacio_der": 1.00,
+                        "tipus_montura": 'pasta',
+                        "color_montura": 'groc amb ratlles',
+                        "color_vidres": 'groc',
+                        "preu": 190.50
+                    }]
+                }
+            ]
+        },
+        {
+            "_id": ObjectId("000000000000000000000003"),
+            "nom_proveidor": 'best_glasses',
+            "telefon": 954778565,
+            "fax": 953886748,
+            "nif": 'M74835456',
+            "adreza": {
+                "carrer": 'Dumbarton Road',
+                "numero": 305,
+                "pis": 4,
+                "porta": 1,
+                "ciutat": 'Glasgow',
+                "codi_postal": 55555,
+                "pais": 'United Kingdom'
+            },
+            // (235, 'Timberland', 3),
+            "marques": [
+                {
+                    "_id": ObjectId("000000000000000000000013"),
+                    "marca": 'Timberland',
+                    "ulleres": [{
+                        "_id": ObjectId("000000000000000000000026"),
+                        "id_ullera": '1576455754',
+                        "model": 'T-9033.938',
+                        "graduacio_esq": 1.05,
+                        "graduacio_der": 2.00,
+                        "tipus_montura": 'flotant',
+                        "color_montura": 'platejat',
+                        "color_vidres": 'transparents',
+                        "preu": 180.25
+                    }]
                 },
+            // (877, 'Ralph Lauren', 3);
                 {
-                    "_id": ObjectId("000000000000000000000004"),
-                    "nom_proveidor": 'safag',
-                    "telefon": 971854872,
-                    "fax": 971482454,
-                    "nif": 'U23492324',
-                    "adreza": {
-                        "carrer": 'Carrer de Sant Josep',
-                        "numero": 35,
-                        "pis": "Bx.",
-                        "porta": 2,
-                        "ciutat": 'Maó',
-                        "codi_postal": 07703,
-                        "pais": 'Espanya'
-                    }
-                    // (323, 'Carolina Herrera', 3),
+                    "_id": ObjectId("000000000000000000000014"),
+                    "marca": 'Ralph Lauren',
+                    "ullera": [{
+                        "_id": ObjectId("000000000000000000000027"),
+                        "id_ullera": '1454556464',
+                        "model": 'RL9033/938',
+                        "graduacio_esq": 1.75,
+                        "graduacio_der": 1.25,
+                        "tipus_montura": 'metàl·lica',
+                        "color_montura": 'negre',
+                        "color_vidres": 'transparent',
+                        "preu": 130.50
+                    }]
+                }
+            ]
+        },
+        {
+            "_id": ObjectId("000000000000000000000004"),
+            "nom_proveidor": 'safag',
+            "telefon": 971854872,
+            "fax": 971482454,
+            "nif": 'U23492324',
+            "adreza": {
+                "carrer": 'Carrer de Sant Josep',
+                "numero": 35,
+                "pis": "Bx.",
+                "porta": 2,
+                "ciutat": 'Maó',
+                "codi_postal": 07703,
+                "pais": 'Espanya'
+            },
+            // (323, 'Carolina Herrera', 3),
+            "marques": [
+                {
+                    "_id": ObjectId("0000000000000000000000015"),
+                    "marca": 'Carolina Herrera',
+                    "ulleres": [{
+                        "_id": ObjectId("000000000000000000000028"),
+                        "id_ullera": '1246464675',
+                        "model": 'CH-6455.67',
+                        "graduacio_esq": 2.50,
+                        "graduacio_der": 1.50,
+                        "tipus_montura": 'flotant',
+                        "color_montura": 'negre',
+                        "color_vidres": 'transparents',
+                        "preu": 220.85
+                    }]
                 }
             ]
         }
@@ -131,9 +237,8 @@ db.proveidors.insertMany(
 ),
 
 
-
 // db.createCollection(clients);
-    db.clients.drop();
+db.clients.drop();
 db.clients.insertMany([
     {
         "_id": ObjectId("000000000000000000000005"),

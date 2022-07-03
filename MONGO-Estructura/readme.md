@@ -4,9 +4,9 @@
 
 Modelarem diversos diagrames entitat-relació.
 
-### Nivell 1:
+## Nivell 1:
 
-**- Exercici 1 - Òptica**
+#### - Exercici 1 - Òptica
 
 ***Una òptica, anomenada “Cul d'Ampolla”, vol informatitzar la gestió dels clients/es i vendes d'ulleres.***
 
@@ -80,9 +80,9 @@ En una botiga poden treballar molts empleats/des i un empleat/da només pot treb
     - Si treballa com a cuiner/a o repartidor/a. Per a les comandes de repartiment a domicili interessa guardar qui és el repartidor/a que fa el lliurament de la comanda i la data/hora del moment del lliurament.
 
 
-    ### Nivell 2:
+## Nivell 2:
 
-**- Exercici 1 - YouTube**
+#### - Exercici 1 - YouTube
 
 **Tractarem de fer un model senzill de com seria la base de dades per a una versió reduïda de YouTube.**
 
@@ -126,9 +126,9 @@ En una botiga poden treballar molts empleats/des i un empleat/da només pot treb
 
 - Un usuari/ària pot marcar un comentari com m'agrada o no m'agrada. Caldrà portar un registre dels usuaris/es que han marcat un comentari com m'agrada/no m'agrada, i en quina data/hora ho van fer.
 
-    ### Nivell 3:
+## Nivell 3:
 
-**- Exercici 1 - Spotify**
+#### - Exercici 1 - Spotify
 
 **Tractarem de fer un model senzill de com seria la base de dades necessària per a Spotify.**
 

@@ -1,23 +1,3 @@
-// https://www.youtube.com/watch?v=lWMemPN9t6Q
-
-// const { ObjectId } = require("mongodb");
-
-// const { ObjectId } = require("mongodb");
-
-// https://www.tutorialesprogramacionya.com/mongodbya/detalleconcepto.php?punto=26&codigo=26&inicio=20
-// https://www.mongodb.com/docs/manual/
-
-// const { MongoClient }  = require('mongodb');
-// const url = 'mongodb://localhost:27017';
-// const proveidors = new MongoClient(url);
-
-
-// npm install mongodb
-
-// use('optica_CULDAMPOLLA');
-
-// db.dropDatabase();
-
 db.proveidors.drop();
 db.proveidors.insertMany(
     [
@@ -36,7 +16,6 @@ db.proveidors.insertMany(
                 "codi_postal": 08025,
                 "pais": 'Espanya'
             },
-            // (543, 'Ray Ban', 1),
             "marques": [
                 {
                     "_id": ObjectId("000000000000000000000008"),
@@ -51,8 +30,8 @@ db.proveidors.insertMany(
                         "color_montura": 'daurat',
                         "color_vidres": 'verd',
                         "preu": 101.95,
-                        "venedor_id": "000000000000000000000030",
-                        "client_id": "000000000000000000000005"
+                        "venedor_id": ObjectId("000000000000000000000030"),
+                        "client_id": ObjectId("000000000000000000000005")
                     }]
                 },
                 {
@@ -69,8 +48,8 @@ db.proveidors.insertMany(
                             "color_montura": 'negre',
                             "color_vidres": 'transparent',
                             "preu": 145.00,
-                            "venedor_id": "000000000000000000000032",
-                            "client_id": "000000000000000000000005"
+                            "venedor_id": ObjectId("000000000000000000000032"),
+                            "client_id": ObjectId("000000000000000000000005")
 
                         },
                         {
@@ -83,8 +62,8 @@ db.proveidors.insertMany(
                             "color_montura": 'negre',
                             "color_vidres": 'transparent',
                             "preu": 145.00,
-                            "venedor_id": "000000000000000000000031",
-                            "client_id": "000000000000000000000007"
+                            "venedor_id": ObjectId("000000000000000000000031"),
+                            "client_id": ObjectId("000000000000000000000007")
                         }
                     ]
                 }
@@ -105,7 +84,6 @@ db.proveidors.insertMany(
                 "codi_postal": 08202,
                 "pais": 'Espanya'
             },
-            // (743, 'Prada', 2),
             "marques": [
                 {
                     "_id": ObjectId("000000000000000000000010"),
@@ -120,11 +98,10 @@ db.proveidors.insertMany(
                         "color_montura": 'negre',
                         "color_vidres": 'negre fumat',
                         "preu": 218.95,
-                        "venedor_id": "000000000000000000000031",
-                        "client_id": "000000000000000000000006"
+                        "venedor_id": ObjectId("000000000000000000000031"),
+                        "client_id": ObjectId("000000000000000000000006")
                     }]
                 },
-                // (342, 'Tous', 2),
                 {
                     "_id": ObjectId("000000000000000000000011"),
                     "marca": 'Tous',
@@ -138,11 +115,10 @@ db.proveidors.insertMany(
                         "color_montura": 'coure',
                         "color_vidres": 'verd',
                         "preu": 180.25,
-                        "venedor_id": "000000000000000000000031",
-                        "client_id": "000000000000000000000007"
+                        "venedor_id": ObjectId("000000000000000000000031"),
+                        "client_id": ObjectId("000000000000000000000007")
                     }]
                 },
-                // (234, 'Etnia Barcelona', 2),
                 {
                     "_id": ObjectId("000000000000000000000012"),
                     "marca": 'Etnia Barcelona',
@@ -156,8 +132,8 @@ db.proveidors.insertMany(
                         "color_montura": 'groc amb ratlles',
                         "color_vidres": 'groc',
                         "preu": 190.50,
-                        "venedor_id": "000000000000000000000033",
-                        "client_id": "000000000000000000000006"
+                        "venedor_id": ObjectId("000000000000000000000033"),
+                        "client_id": ObjectId("000000000000000000000006")
                     }]
                 }
             ]
@@ -177,7 +153,6 @@ db.proveidors.insertMany(
                 "codi_postal": 55555,
                 "pais": 'United Kingdom'
             },
-            // (235, 'Timberland', 3),
             "marques": [
                 {
                     "_id": ObjectId("000000000000000000000013"),
@@ -192,11 +167,10 @@ db.proveidors.insertMany(
                         "color_montura": 'platejat',
                         "color_vidres": 'transparents',
                         "preu": 180.25,
-                        "venedor_id": "000000000000000000000032",
-                        "client_id": "000000000000000000000007"
+                        "venedor_id": ObjectId("000000000000000000000032"),
+                        "client_id": ObjectId("000000000000000000000007")
                     }]
                 },
-                // (877, 'Ralph Lauren', 3);
                 {
                     "_id": ObjectId("000000000000000000000014"),
                     "marca": 'Ralph Lauren',
@@ -210,8 +184,8 @@ db.proveidors.insertMany(
                         "color_montura": 'negre',
                         "color_vidres": 'transparent',
                         "preu": 130.50,
-                        "venedor_id": "000000000000000000000033",
-                        "client_id": "000000000000000000000005"
+                        "venedor_id": ObjectId("000000000000000000000033"),
+                        "client_id": ObjectId("000000000000000000000005")
                     }]
                 }
             ]
@@ -231,7 +205,6 @@ db.proveidors.insertMany(
                 "codi_postal": 07703,
                 "pais": 'Espanya'
             },
-            // (323, 'Carolina Herrera', 3),
             "marques": [
                 {
                     "_id": ObjectId("000000000000000000000015"),
@@ -246,8 +219,8 @@ db.proveidors.insertMany(
                         "color_montura": 'negre',
                         "color_vidres": 'transparents',
                         "preu": 220.85,
-                        "venedor_id": "000000000000000000000032",
-                        "client_id": "000000000000000000000006"
+                        "venedor_id": ObjectId("000000000000000000000032"),
+                        "client_id": ObjectId("000000000000000000000006")
                     }]
                 }
             ]
@@ -256,7 +229,6 @@ db.proveidors.insertMany(
 ),
 
 
-    // db.createCollection(clients);
     db.clients.drop();
 db.clients.insertMany([
     {
@@ -311,7 +283,7 @@ db.clients.insertMany([
         "telefon": 932264535,
         "correu_electronic": 'jordigc@gmail.com',
         "data_registre": '2017-09-26',
-        "recomanacio_id": "000000000000000000000005"
+        "recomanacio_id": ObjectId("000000000000000000000005")
     }
 ]);
 

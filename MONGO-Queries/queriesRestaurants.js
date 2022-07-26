@@ -9,7 +9,7 @@ db.restaurants.find({"grades.score": {$gt:90}});
 db.restaurants.find({"grades.score": {$gt:80, $lte:100}});
 db.restaurants.find({"address.coord":{$lte: -95.754168}});
 // db.restaurants.find({"cuisine":{$not: /American/}, "grades.score": {$gt:70},"address.coord":{$lte: -65.754168}});
-// db.restaurants.find({"cuisine":{$not: /American/}, "grades.score": {$gt:70}, "address.coord": {$lte: -65.754168}});
+// db.restaurants.find({"cuisine":{$not: /American/}, "grades.score": {$gt:70}, "address.coord": {$lte: -65.754168}});  //! "address.coord.1":
 db.restaurants.find({"cuisine":{$not: /American/}, "grades.grade": {$regex: /A/}, "borough": {$not: /Brooklyn/}}).sort({"cuisine": -1});
 db.restaurants.find({"name": {$regex: /^Wil/}}, {"name":1, "restaurant_id":1,  "borough":1, "cuisine":1, "_id":0});
 db.restaurants.find({"name": {$regex: /ces$/}}, {"name":1, "restaurant_id":1,  "borough":1, "cuisine":1, "_id":0});
@@ -30,3 +30,9 @@ db.restaurants.find({},{"cuisine": 1, "borough": 1}).sort({"cuisine": 1, "boroug
 
 db.restaurants.find({"name": {$regex: /mon/i}}, {"name":1, "borough":1, "address.coord":1, "cuisine":1, "_id":0});
 db.restaurants.find({"name": {$regex: /^Mad/}}, {"name":1, "borough":1, "address.coord":1, "cuisine":1, "_id":0});
+
+
+
+// 11. Escriu una consulta de MongoDB per a trobar els restaurants que no preparen cap cuisine de 'American' i la seva qualificació és superior a 70 i latitud inferior a -65.754168.
+// 12. Escriu una consulta per trobar els restaurants que no preparen cap cuisine de 'American' i van aconseguir un marcador més de 70 i localitzat en la longitud menys que -65.754168. Nota: Fes aquesta consulta sense utilitzar $and operador.
+// 21. Escriu una consulta per trobar el restaurant_id, name, borough i cuisine per a aquells restaurants que preparen peix excepte 'American' i 'Chinees' o el name del restaurant comença amb lletres 'Wil'.

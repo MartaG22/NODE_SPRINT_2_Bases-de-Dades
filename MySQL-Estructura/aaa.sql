@@ -26,7 +26,7 @@ CREATE TABLE localitats(
 
 -- DROP TABLE IF EXISTS botigues;
 CREATE TABLE botigues(
-    id_botiga INT(5) NOT NULL AUTO_INCREMENT,
+    id_botiga INT(11) NOT NULL AUTO_INCREMENT,
     adreza VARCHAR(60) NOT NULL,
     codi_postal VARCHAR(25) NOT NULL,
     id_localitat INT(11) NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE categoria_pizzes(
 -- DROP TABLE IF EXISTS productes;
 
 CREATE TABLE productes(
-    id_producte INT(11) NOT NULL AUTO_INCREMENT,
+    id_producte INT NOT NULL AUTO_INCREMENT,
     tipus_producte ENUM('pizza', 'hamburguesa', 'beguda') NOT NULL,
     id_categoriaPizza INT,
     nom VARCHAR(60) NOT NULL,
@@ -107,48 +107,39 @@ CREATE TABLE productes(
 
 -- DROP TABLE IF EXISTS comandes;
 
-
 CREATE TABLE comandes(
     id_comanda INT NOT NULL,
-    -- id_producte INT NOT NULL,
-    data_hora_comanda DATETIME NOT NULL,
+    id_producte INT NOT NULL,
+    data_hora DATETIME NOT NULL,
+    tipus_comanda ENUM('repartiment', 'botiga') NOT NULL,
     -- id_producte INT,
     id_client INT,
     id_botiga INT,
-    tipus_comanda ENUM('repartiment', 'botiga') NOT NULL,
-    id_empleat_repartidor INT,
-    data_hora_entrega DATETIME,
+    id_empleat int,
     PRIMARY KEY (id_comanda),
-    -- FOREIGN KEY (id_producte) REFERENCES productes(id_producte),
+    FOREIGN KEY (id_producte) REFERENCES productes(id_producte),
     FOREIGN KEY (id_client) REFERENCES clients(id_client),
     FOREIGN KEY (id_botiga) REFERENCES botigues(id_botiga),
-    FOREIGN KEY (id_empleat_repartidor) REFERENCES empleats(id_empleat)
+    FOREIGN KEY (id_empleat) REFERENCES empleats(id_empleat)
 );
 
-CREATE TABLE producte_comanda(
-    id_producte_comanda INT(11) NOT NULL AUTO_INCREMENT,
-    id_producte INT NOT NULL,
-    id_comanda INT NOT NULL,
-    PRIMARY  KEY (id_producte_comanda),
-    FOREIGN KEY (id_comanda) REFERENCES comandes (id_comanda)
-);
 
 -- DROP TABLE IF EXISTS entrega_comanda;
 
--- CREATE TABLE entrega_comanda(
---      id_entrega INT,
---      id_client INT,
---      id_botiga INT,
---     id_empleat_repartidor INT,
---     id_domicili INT,
---     data_hora_entrega DATETIME NOT NULL,
---     PRIMARY KEY (id_entrega),
---     FOREIGN KEY (id_entrega) REFERENCES comandes(id_comanda),
---     FOREIGN KEY (id_client) REFERENCES clients(id_client),
---     FOREIGN KEY (id_botiga) REFERENCES botigues(id_botiga),  
---     FOREIGN KEY (id_empleat_repartidor) REFERENCES empleats(id_empleat),
---     FOREIGN KEY (id_domicili) REFERENCES adreces(id_client)
--- );
+CREATE TABLE entrega_comanda(
+    id_entrega INT,
+    id_client INT,
+    id_botiga INT,
+    id_empleat_repartidor INT,
+    id_domicili INT,
+    data_hora_entrega DATETIME NOT NULL,
+    PRIMARY KEY (id_entrega),
+    FOREIGN KEY (id_entrega) REFERENCES comandes(id_comanda),
+    FOREIGN KEY (id_client) REFERENCES clients(id_client),
+    FOREIGN KEY (id_botiga) REFERENCES botigues(id_botiga),  
+    FOREIGN KEY (id_empleat_repartidor) REFERENCES empleats(id_empleat),
+    FOREIGN KEY (id_domicili) REFERENCES adreces(id_client)
+);
 
 
 INSERT INTO categoria_pizzes(id_categoriaPizza, nom_categoria)
@@ -233,58 +224,20 @@ VALUES
     (11, NULL, NULL, 7, 'Passeig Central', 65, '3', 'B', 'Portbou', 17497, 'Girona'),
     (12, NULL, NULL, 8, 'Carrer del Mar', 15, 'Bx.', '-', 'Colera', 17496, 'Girona');
 
-CREATE TABLE adreces(
-    id_adreza INT NOT NULL AUTO_INCREMENT,
-    id_botiga INT(5),
-    id_client INT(5),
-    id_empleat INT(5),
-    carrer VARCHAR(60) NOT NULL,
-    numero INT NOT NULL,
-    pis VARCHAR(3) NOT NULL,
-    porta VARCHAR(3) NOT NULL,
-    localitat VARCHAR(50) NOT NULL,
-    codi_postal INT NOT NULL,
-    provincia VARCHAR(50),
-    PRIMARY KEY (id_adreza),
-    FOREIGN KEY (id_botiga) REFERENCES botigues(id_botiga)
-    FOREIGN KEY (id_client) REFERENCES clients(id_client),
-    FOREIGN KEY (id_empleat) REFERENCES empleats(id_empleat)
-);
-
--- INSERT INTO comandes(id_comanda, id_producte, data_hora, tipus_comanda, id_client, id_botiga, id_empleat)
-INSERT INTO comandes(id_comanda, data_hora_comanda, id_client, id_botiga, tipus_comanda, id_empleat_repartidor, data_hora_entrega)
-
+INSERT INTO comandes(id_comanda, id_producte, data_hora, tipus_comanda, id_client, id_botiga, id_empleat)
 VALUES
-    (1, '2022-05-24 21:00:00', 1, 2, 'repartiment', 3, '2022-05-24 21:35:00'),
-    (2, '2021-12-29 21:45:00', 2, 1, 'repartiment', 2, '2021-12-29 22:25:00'),
-    (3, '2021-09-21 14:40:00', 3, 3, 'botiga', 3, NULL),
-    (4, '2022-01-16 15:30:00', 4, 4, 'repartiment', 4, '2022-01-16 15:30:00'),
-    (5, '2021-07-05 20:50:00', 3, 2, 'botiga', 2, NULL),
-    (6, '2022-06-11 19:45:00', 3, 4, 'repartiment', 4, '2022-06-11 20:23:00');
+    (1, 2, '2022-05-24 21:00:00', 'repartiment', 1, 2, 3),
+    (2, 3, '2021-12-29 21:45:00', 'repartiment', 2, 1, 2),
+    (3, 4, '2021-09-21 14:40:00', 'botiga', 3, 3, 3),
+    (4, 5, '2022-01-16 15:30:00', 'repartiment', 4, 4, 4),
+    (5, 6, '2021-07-05 20:50:00', 'botiga', 3, 2, 2);
 
 
-
--- CREATE TABLE comandes(
---     id_comanda INT NOT NULL,
---     -- id_producte INT NOT NULL,
---     data_hora_comanda DATETIME NOT NULL,
---     -- id_producte INT,
---     id_client INT,
---     id_botiga INT,
---     tipus_comanda ENUM('repartiment', 'botiga') NOT NULL,
---     id_empleat_repartidor INT,
---     data_hora_entrega DATETIME NOT NULL,
---     PRIMARY KEY (id_comanda),
---     -- FOREIGN KEY (id_producte) REFERENCES productes(id_producte),
---     FOREIGN KEY (id_client) REFERENCES clients(id_client),
---     FOREIGN KEY (id_botiga) REFERENCES botigues(id_botiga),
---     FOREIGN KEY (id_empleat_repartidor) REFERENCES empleats(id_empleat)
-
--- INSERT INTO entrega_comanda(id_entrega, id_client, id_botiga, id_empleat_repartidor, id_domicili, data_hora_entrega)
--- VALUES
---     (1, 1, 2, 6, 1, '2022-05-24 21:35:00'),
---     (2, 2, 1, 3, 2, '2021-12-29 22:25:00'),
---     (4, 4, 4, 4, 4, '2022-01-16 15:30:00');
+INSERT INTO entrega_comanda(id_entrega, id_client, id_botiga, id_empleat_repartidor, id_domicili, data_hora_entrega)
+VALUES
+    (1, 1, 2, 6, 1, '2022-05-24 21:35:00'),
+    (2, 2, 1, 3, 2, '2021-12-29 22:25:00'),
+    (4, 4, 4, 4, 4, '2022-01-16 15:30:00');
 
 -- Q U E R I E S --
 
@@ -293,5 +246,4 @@ SELECT COUNT(tipus_producte) FROM (comandes INNER JOIN botigues ON botigues.id_b
 
 
 -- 2 - Llista quantes comandes ha efectuat un determinat empleat */
-SELECT id_empleat_repartidor, COUNT(comandes.id_comanda) FROM comandes WHERE id_empleat_repartidor = 4;
-
+SELECT id_empleat, COUNT(comandes.id_comanda) FROM comandes WHERE id_empleat = 4;

@@ -1,3 +1,11 @@
+<!-- A la pizzeria s'han de fer un parell de canvis importants: 
+ara mateix només et pot demanar un producte per comanda (s'ha de fer una taula intermitja per la relació one2many),
+- la taula "entrega" es podria fusionar amb la comanda (és una relació one2one), 
+- les adreces no estàn connectades amb les botigues i les localitats haurien d'estar connectades només amb les adreces -->
+
+
+
+
 # Entrega 2.1: Estructura de dades MySQL
 
 ## Descripció:

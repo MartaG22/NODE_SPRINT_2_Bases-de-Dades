@@ -26,15 +26,23 @@ CREATE TABLE localitats(
 
 -- DROP TABLE IF EXISTS botigues;
 CREATE TABLE botigues(
-    id_botiga INT(5) NOT NULL AUTO_INCREMENT,
-    adreza VARCHAR(60) NOT NULL,
-    codi_postal VARCHAR(25) NOT NULL,
-    id_localitat INT(11) NOT NULL,
-    PRIMARY KEY(id_botiga),
-    FOREIGN KEY(id_localitat) REFERENCES localitats (id_localitat)
+    id_botiga INT(11) NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (id_botiga)
+    -- adreza VARCHAR(60) NOT NULL,
+    -- codi_postal VARCHAR(25) NOT NULL,
+    -- id_localitat INT(11) NOT NULL,
+    -- PRIMARY KEY(id_botiga)
+    -- FOREIGN KEY(id_localitat) REFERENCES localitats (id_localitat)
 );
 
--- DROP TABLE IF EXISTS clients;
+-- CREATE TABLE botigues(
+--     id_botiga INT(11) NOT NULL AUTO_INCREMENT,
+--     adreza VARCHAR(60) NOT NULL,
+--     codi_postal VARCHAR(25) NOT NULL,
+--     id_localitat INT(11) NOT NULL,
+--     PRIMARY KEY(id_botiga)
+--     -- FOREIGN KEY(id_localitat) REFERENCES localitats (id_localitat)
+-- );
 
 CREATE TABLE clients(
     id_client INT NOT NULL AUTO_INCREMENT,
@@ -73,10 +81,12 @@ CREATE TABLE adreces(
     numero INT NOT NULL,
     pis VARCHAR(3) NOT NULL,
     porta VARCHAR(3) NOT NULL,
-    localitat VARCHAR(50) NOT NULL,
+    id_localitat INT NOT NULL,
     codi_postal INT NOT NULL,
-    provincia VARCHAR(50),
+    id_provincia INT,
     PRIMARY KEY (id_adreza),
+    FOREIGN KEY (id_localitat) REFERENCES localitats(id_localitat),
+    FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia),
     FOREIGN KEY (id_botiga) REFERENCES botigues(id_botiga),
     FOREIGN KEY (id_client) REFERENCES clients(id_client),
     FOREIGN KEY (id_empleat) REFERENCES empleats(id_empleat)
@@ -91,10 +101,9 @@ CREATE TABLE categoria_pizzes(
     PRIMARY KEY (id_categoriaPizza)
 );
 
--- DROP TABLE IF EXISTS productes;
 
 CREATE TABLE productes(
-    id_producte INT(11) NOT NULL AUTO_INCREMENT,
+    id_producte INT NOT NULL AUTO_INCREMENT,
     tipus_producte ENUM('pizza', 'hamburguesa', 'beguda') NOT NULL,
     id_categoriaPizza INT,
     nom VARCHAR(60) NOT NULL,
@@ -125,20 +134,41 @@ CREATE TABLE comandes(
     FOREIGN KEY (id_empleat_repartidor) REFERENCES empleats(id_empleat)
 );
 
+
+
 CREATE TABLE producte_comanda(
     id_producte_comanda INT(11) NOT NULL AUTO_INCREMENT,
     id_producte INT NOT NULL,
+    quantitat INT(2) NOT NULL,
     id_comanda INT NOT NULL,
     PRIMARY  KEY (id_producte_comanda),
     FOREIGN KEY (id_comanda) REFERENCES comandes (id_comanda)
 );
 
+
+-- CREATE TABLE comandes(
+--     id_comanda INT NOT NULL,
+--     id_producte INT NOT NULL,
+--     data_hora DATETIME NOT NULL,
+--     tipus_comanda ENUM('repartiment', 'botiga') NOT NULL,
+--     -- id_producte INT,
+--     id_client INT,
+--     id_botiga INT,
+--     id_empleat int,
+--     PRIMARY KEY (id_comanda),
+--     FOREIGN KEY (id_producte) REFERENCES productes(id_producte),
+--     FOREIGN KEY (id_client) REFERENCES clients(id_client),
+--     FOREIGN KEY (id_botiga) REFERENCES botigues(id_botiga),
+--     FOREIGN KEY (id_empleat) REFERENCES empleats(id_empleat)
+-- );
+
+
 -- DROP TABLE IF EXISTS entrega_comanda;
 
 -- CREATE TABLE entrega_comanda(
---      id_entrega INT,
---      id_client INT,
---      id_botiga INT,
+--     id_entrega INT,
+--     id_client INT,
+--     id_botiga INT,
 --     id_empleat_repartidor INT,
 --     id_domicili INT,
 --     data_hora_entrega DATETIME NOT NULL,
@@ -189,14 +219,26 @@ VALUES
     (12, 'Calafell', 2),
     (13, 'Agramunt', 3),
     (14, 'Montsonís',3),
-    (15, 'Penelles', 3);
+    (15, 'Penelles', 3), -- Hasta aquí estaba. PAra abajo es añadido de las ADREZAS
+    (16, 'Sabadell', 1),
+    (17, 'Sant Andreu de la Barca', 1),
+    (18, 'Terrassa', 1),
+    (19, 'Vallirana', 1),
+    (20, 'Vilanova', 1),
+    (21, 'Portbou', 4),
+    (22, 'Colera', 4);
 
-INSERT INTO botigues (id_botiga, adreza, codi_postal, id_localitat)
-VALUES
-    (1, 'Carrer Indústria, 145, bx.', 08025, 1),
-    (2, 'Carrer dels Arcs 34', 43880, 11),
-    (3, 'Carrer de Pere III, 7', 17600, 8),
-    (4, 'Passatge del Mig, 16', 25737, 14);
+
+INSERT INTO botigues (id_botiga) VALUES (1), (2), (3), (4);
+
+
+
+-- INSERT INTO botigues (id_botiga, adreza, codi_postal, id_localitat)
+-- VALUES
+--     (1, 'Carrer Indústria, 145, bx.', 08025, 1),
+--     (2, 'Carrer dels Arcs 34', 43880, 11),
+--     (3, 'Carrer de Pere III, 7', 17600, 8),
+    -- (4, 'Passatge del Mig, 16', 25737, 14);
 
 
 INSERT INTO clients (id_client, nom, primer_cognom, segon_cognom, telefon, correu_electronic, data_registre)
@@ -218,42 +260,37 @@ VALUES
     (8, 'Jaume', 'Ortega', 'Coma', '67234534S', 972456423, 'jaumeortega@gmail.com', 'repartidor', 3 );
 
 
-INSERT INTO adreces(id_adreza, id_botiga ,id_client, id_empleat, carrer, numero, pis, porta, localitat, codi_postal, provincia)
+INSERT INTO adreces(id_adreza, id_botiga, id_client, id_empleat, carrer, numero, pis, porta, id_localitat, codi_postal, id_provincia)
 VALUES
-    (1, NULL, 1, NULL, 'Carrer Còrsega', 458, '3', '3', 'Barcelona', 08025, 'Barcelona'),
-    (2, NULL, 2, NULL, 'Carrer de Brujas', 106, '1', 'A', 'Sabadell', 08202, 'Barcelona'),
-    (3, NULL, NULL, 1, 'Carrer Major', 30, '1', '1', 'Sant Andreu de la Barca', 08740, 'Barcelona'),
-    (4, NULL, NULL, 2, 'Carrer Sicília', 215, 'Bx.', '1', 'Barcelona', 08013, 'Barcelona'),
-    (5, NULL, 3, NULL, 'Carrer Alacant', 58, '1', '4', 'Terrassa', 08224, 'Barcelona'),
-    (6, NULL, NULL, 3, 'Carrer Comerç', 10, 'Bx.', '-', 'Vallirana', 08759, 'Barcelona'),
-    (7, NULL, NULL, 4, 'Carrer Cinca', 35, '3', '5', 'Barcelona', 08030, 'Barcelona'),
-    (8, NULL, NULL, 5, 'Carrer Sòcrates', 24, '1', '1', 'Barcelona', 08030, 'Barcelona'),
-    (9, NULL, NULL, 6, 'Carrer Subirats', 87, '3', '1', 'Vilanova', 08800, 'Barcelona'),
-    (10, NULL, 4, NULL, 'Carrer Gran', 4, '2', '2', 'Figueres', 17600, 'Girona'),
-    (11, NULL, NULL, 7, 'Passeig Central', 65, '3', 'B', 'Portbou', 17497, 'Girona'),
-    (12, NULL, NULL, 8, 'Carrer del Mar', 15, 'Bx.', '-', 'Colera', 17496, 'Girona');
+    (1, NULL, 1, NULL, 'Carrer Còrsega', 458, '3', '3', 1, 08025, 1),
+    (2, NULL, 2, NULL, 'Carrer de Brujas', 106, '1', 'A', 16, 08202, 1),
+    (3, NULL, NULL, 1, 'Carrer Major', 30, '1', '1', 17, 08740, 1),
+    (4, NULL, NULL, 2, 'Carrer Sicília', 215, 'Bx.', '1', 1, 08013, 1),
+    (5, NULL, 3, NULL, 'Carrer Alacant', 58, '1', '4', 18, 08224, 1),
+    (6, NULL, NULL, 3, 'Carrer Comerç', 10, 'Bx.', '-', 19, 08759, 1),
+    (7, NULL, NULL, 4, 'Carrer Cinca', 35, '3', '5', 1, 08030, 1),
+    (8, NULL, NULL, 5, 'Carrer Sòcrates', 24, '1', '1', 1, 08030, 1),
+    (9, NULL, NULL, 6, 'Carrer Subirats', 87, '3', '1', 20, 08800, 1),
+    (10, NULL, 4, NULL, 'Carrer Gran', 4, '2', '2', 8, 17600, 4),
+    (11, NULL, NULL, 7, 'Passeig Central', 65, '3', 'B', 21, 17497, 4),
+    (12, NULL, NULL, 8, 'Carrer del Mar', 15, 'Bx.', '-', 22, 17496, 4),
+    (13, 1, NULL, NULL, 'Carrer Indústria', 145, 'Bx.', '-', 1, 08025, 1),
+    (14, 2, NULL, NULL, 'Carrer dels Arcs', 34, '-', '-', 11, 43880, 2),
+    (15, 3, NULL, NULL, 'Carrer de Pere III', 7, '-', '-', 8, 17600, 4),
+    (16, 4, NULL, NULL, 'Passatge del Mig', 16, 'Bx.', '-', 14, 25737, 3);
 
-CREATE TABLE adreces(
-    id_adreza INT NOT NULL AUTO_INCREMENT,
-    id_botiga INT(5),
-    id_client INT(5),
-    id_empleat INT(5),
-    carrer VARCHAR(60) NOT NULL,
-    numero INT NOT NULL,
-    pis VARCHAR(3) NOT NULL,
-    porta VARCHAR(3) NOT NULL,
-    localitat VARCHAR(50) NOT NULL,
-    codi_postal INT NOT NULL,
-    provincia VARCHAR(50),
-    PRIMARY KEY (id_adreza),
-    FOREIGN KEY (id_botiga) REFERENCES botigues(id_botiga)
-    FOREIGN KEY (id_client) REFERENCES clients(id_client),
-    FOREIGN KEY (id_empleat) REFERENCES empleats(id_empleat)
-);
 
--- INSERT INTO comandes(id_comanda, id_producte, data_hora, tipus_comanda, id_client, id_botiga, id_empleat)
+
+
+-- INSERT INTO botigues (id_botiga, adreza, codi_postal, id_localitat)
+-- VALUES
+--     (1, 'Carrer Indústria, 145, bx.', 08025, 1),
+--     (2, 'Carrer dels Arcs 34', 43880, 11),
+--     (3, 'Carrer de Pere III, 7', 17600, 8),
+--     (4, 'Passatge del Mig, 16', 25737, 14);
+
+
 INSERT INTO comandes(id_comanda, data_hora_comanda, id_client, id_botiga, tipus_comanda, id_empleat_repartidor, data_hora_entrega)
-
 VALUES
     (1, '2022-05-24 21:00:00', 1, 2, 'repartiment', 3, '2022-05-24 21:35:00'),
     (2, '2021-12-29 21:45:00', 2, 1, 'repartiment', 2, '2021-12-29 22:25:00'),
@@ -264,21 +301,24 @@ VALUES
 
 
 
--- CREATE TABLE comandes(
---     id_comanda INT NOT NULL,
---     -- id_producte INT NOT NULL,
---     data_hora_comanda DATETIME NOT NULL,
---     -- id_producte INT,
---     id_client INT,
---     id_botiga INT,
---     tipus_comanda ENUM('repartiment', 'botiga') NOT NULL,
---     id_empleat_repartidor INT,
---     data_hora_entrega DATETIME NOT NULL,
---     PRIMARY KEY (id_comanda),
---     -- FOREIGN KEY (id_producte) REFERENCES productes(id_producte),
---     FOREIGN KEY (id_client) REFERENCES clients(id_client),
---     FOREIGN KEY (id_botiga) REFERENCES botigues(id_botiga),
---     FOREIGN KEY (id_empleat_repartidor) REFERENCES empleats(id_empleat)
+INSERT INTO producte_comanda(id_producte_comanda, id_producte, quantitat, id_comanda)
+VALUES 
+(1, 5, 1, 1), (2, 2, 3, 1), (3, 3, 2, 1),
+(4, 8, 2, 2), (5, 7, 2, 2), (6, 6, 2, 2), (7, 2, 1, 2),
+(8, 3, 1, 3), (9, 4, 1, 3), (10, 1, 1, 3),
+(11, 7, 1, 4), (12, 3, 1, 4), (13, 1, 1, 4);
+
+
+
+
+-- INSERT INTO comandes(id_comanda, id_producte, data_hora, tipus_comanda, id_client, id_botiga, id_empleat)
+-- VALUES
+--     (1, 2, '2022-05-24 21:00:00', 'repartiment', 1, 2, 3),
+--     (2, 3, '2021-12-29 21:45:00', 'repartiment', 2, 1, 2),
+--     (3, 4, '2021-09-21 14:40:00', 'botiga', 3, 3, 3),
+--     (4, 5, '2022-01-16 15:30:00', 'repartiment', 4, 4, 4),
+--     (5, 6, '2021-07-05 20:50:00', 'botiga', 3, 2, 2);
+
 
 -- INSERT INTO entrega_comanda(id_entrega, id_client, id_botiga, id_empleat_repartidor, id_domicili, data_hora_entrega)
 -- VALUES
@@ -289,9 +329,12 @@ VALUES
 -- Q U E R I E S --
 
 -- 1- Llista quants productes del tipus 'begudes' s'han venut en una determinada localitat
-SELECT COUNT(tipus_producte) FROM (comandes INNER JOIN botigues ON botigues.id_botiga = comandes.id_botiga) INNER JOIN productes WHERE productes.tipus_producte = 'beguda' AND id_localitat = 1;
+SELECT COUNT(tipus_producte) FROM ((productes INNER JOIN producte_comanda ON productes.id_producte = producte_comanda.id_producte) INNER JOIN comandes ON comandes.id_comanda = producte_comanda.id_comanda) INNER JOIN botigues ON botigues.id_botiga = comandes.id_botiga INNER JOIN adreces ON adreces.id_botiga = botigues.id_botiga WHERE productes.tipus_producte = 'beguda' AND adreces.id_localitat = 1;
+-- botigues ON comandes.id_botiga = botigues.id_botiga) INNER JOIN adreces ON adreces.id_botiga = botigues.id_botiga) WHERE productes.tipus_producte = 'beguda' AND adreces.id_localitat = 1;
+--  ON botigues.id_botiga = comandes.id_botiga) INNER JOIN productes WHERE productes.tipus_producte = 'beguda' AND id_localitat = 1;
+
+-- SELECT COUNT(tipus_producte) FROM (comandes INNER JOIN botigues ON botigues.id_botiga = comandes.id_botiga) INNER JOIN productes WHERE productes.tipus_producte = 'beguda' AND id_localitat = 1;
 
 
 -- 2 - Llista quantes comandes ha efectuat un determinat empleat */
-SELECT id_empleat_repartidor, COUNT(comandes.id_comanda) FROM comandes WHERE id_empleat_repartidor = 4;
-
+SELECT id_empleat_repartidor, COUNT(comandes.id_comanda) FROM comandes WHERE comandes.id_empleat_repartidor = 4;

@@ -6,103 +6,114 @@ USE CULDAMPOLLA;
 
 DROP TABLE IF EXISTS empleats;
 
-CREATE TABLE empleats(
-    id_empleat INT NOT NULL AUTO_INCREMENT,
-    nom VARCHAR(50) NOT NULL,
-    primer_cognom VARCHAR(50) NOT NULL,
-    segon_cognom VARCHAR(50) NOT NULL,
-    NIF VARCHAR(9) NOT NULL,
-    telefon INT NOT NULL,
-    correu_electronic VARCHAR(60),
-    PRIMARY KEY (id_empleat)
-);
+CREATE TABLE
+    empleats(
+        id_empleat INT NOT NULL AUTO_INCREMENT,
+        nom VARCHAR(50) NOT NULL,
+        primer_cognom VARCHAR(50) NOT NULL,
+        segon_cognom VARCHAR(50) NOT NULL,
+        NIF VARCHAR(9) NOT NULL,
+        telefon INT NOT NULL,
+        correu_electronic VARCHAR(60),
+        PRIMARY KEY (id_empleat)
+    );
 
 DROP TABLE IF EXISTS proveidors;
 
-CREATE TABLE proveidors (
-    id_proveidor INT NOT NULL AUTO_INCREMENT,
-    nom_proveidor VARCHAR(60) NOT NULL,
-    telefon INT NOT NULL,
-    fax INT NOT NULL,
-    NIF VARCHAR(9) NOT NULL,
-    PRIMARY KEY (id_proveidor)
-);
+CREATE TABLE
+    proveidors (
+        id_proveidor INT NOT NULL AUTO_INCREMENT,
+        nom_proveidor VARCHAR(60) NOT NULL,
+        telefon INT NOT NULL,
+        fax INT NOT NULL,
+        NIF VARCHAR(9) NOT NULL,
+        PRIMARY KEY (id_proveidor)
+    );
 
 DROP TABLE IF EXISTS marques;
 
-CREATE TABLE marques(
-    id_marca SMALLINT NOT NULL,
-    nom_marca VARCHAR(50) NOT NULL,
-    id_proveidor INT NOT NULL,
-    PRIMARY KEY (id_marca),
-    FOREIGN KEY (id_proveidor) REFERENCES proveidors(id_proveidor)
-);
+CREATE TABLE
+    marques(
+        id_marca SMALLINT NOT NULL,
+        nom_marca VARCHAR(50) NOT NULL,
+        id_proveidor INT NOT NULL,
+        PRIMARY KEY (id_marca),
+        FOREIGN KEY (id_proveidor) REFERENCES proveidors(id_proveidor)
+    );
 
 DROP TABLE IF EXISTS ulleres;
 
-CREATE TABLE ulleres (
-    id_ullera INT NOT NULL,
-    id_marca SMALLINT NOT NULL,
-    model VARCHAR(50) NOT NULL,
-    graduacio_esq DECIMAL(3, 2) NOT NULL,
-    graduacio_der DECIMAL(3, 2) NOT NULL,
-    tipus_montura ENUM('flotant', 'pasta', 'metàl·lica') NOT NULL,
-    color_montura VARCHAR(40) NOT NULL,
-    color_vidres VARCHAR(40) NOT NULL,
-    preu DECIMAL(5, 2) NOT NULL,
-    PRIMARY KEY (id_ullera),
-    FOREIGN KEY (id_marca) REFERENCES marques(id_marca)
-);
+CREATE TABLE
+    ulleres (
+        id_ullera INT NOT NULL,
+        id_marca SMALLINT NOT NULL,
+        model VARCHAR(50) NOT NULL,
+        graduacio_esq DECIMAL(3, 2) NOT NULL,
+        graduacio_der DECIMAL(3, 2) NOT NULL,
+        tipus_montura ENUM(
+            'flotant',
+            'pasta',
+            'metàl·lica'
+        ) NOT NULL,
+        color_montura VARCHAR(40) NOT NULL,
+        color_vidres VARCHAR(40) NOT NULL,
+        preu DECIMAL(5, 2) NOT NULL,
+        PRIMARY KEY (id_ullera),
+        FOREIGN KEY (id_marca) REFERENCES marques(id_marca)
+    );
 
 DROP TABLE IF EXISTS clients;
 
-CREATE TABLE clients (
-    id_client INT NOT NULL AUTO_INCREMENT,
-    nom VARCHAR(50) NOT NULL,
-    primer_cognom VARCHAR(50) NOT NULL,
-    segon_cognom VARCHAR(50) NOT NULL,
-    telefon INT NOT NULL,
-    correu_electronic VARCHAR(60),
-    data_registre DATE NOT NULL,
-    recomanacio INT,
-    PRIMARY KEY (id_client),
-    FOREIGN KEY (recomanacio) REFERENCES clients(id_client)
-);
+CREATE TABLE
+    clients (
+        id_client INT NOT NULL AUTO_INCREMENT,
+        nom VARCHAR(50) NOT NULL,
+        primer_cognom VARCHAR(50) NOT NULL,
+        segon_cognom VARCHAR(50) NOT NULL,
+        telefon INT NOT NULL,
+        correu_electronic VARCHAR(60),
+        data_registre DATE NOT NULL,
+        recomanacio INT,
+        PRIMARY KEY (id_client),
+        FOREIGN KEY (recomanacio) REFERENCES clients(id_client)
+    );
 
 DROP TABLE IF EXISTS adreces;
 
-CREATE TABLE adreces(
-    id_adreza INT NOT NULL AUTO_INCREMENT,
-    id_empleat INT(5),
-    id_proveidor INT(5),
-    id_client INT(5),
-    carrer VARCHAR(60) NOT NULL,
-    numero INT NOT NULL,
-    pis VARCHAR(3) NOT NULL,
-    porta VARCHAR(3) NOT NULL,
-    ciutat VARCHAR(50) NOT NULL,
-    codi_postal INT NOT NULL,
-    pais VARCHAR(50),
-    PRIMARY KEY (id_adreza),
-    FOREIGN KEY (id_empleat) REFERENCES empleats(id_empleat),
-    FOREIGN KEY (id_proveidor) REFERENCES proveidors(id_proveidor),
-    FOREIGN KEY (id_client) REFERENCES clients(id_client)
-);
+CREATE TABLE
+    adreces(
+        id_adreza INT NOT NULL AUTO_INCREMENT,
+        id_empleat INT(5),
+        id_proveidor INT(5),
+        id_client INT(5),
+        carrer VARCHAR(60) NOT NULL,
+        numero INT NOT NULL,
+        pis VARCHAR(3) NOT NULL,
+        porta VARCHAR(3) NOT NULL,
+        ciutat VARCHAR(50) NOT NULL,
+        codi_postal INT NOT NULL,
+        pais VARCHAR(50),
+        PRIMARY KEY (id_adreza),
+        FOREIGN KEY (id_empleat) REFERENCES empleats(id_empleat),
+        FOREIGN KEY (id_proveidor) REFERENCES proveidors(id_proveidor),
+        FOREIGN KEY (id_client) REFERENCES clients(id_client)
+    );
 
 DROP TABLE IF EXISTS vendes;
 
-CREATE TABLE vendes(
-    id_venda INT NOT NULL AUTO_INCREMENT,
-    num_factura VARCHAR(10),
-    ullera INT NOT NULL,
-    empleat INT NOT NULL,
-    client INT NOT NULL,
-    data_venda DATE,
-    PRIMARY KEY (id_venda),
-    FOREIGN KEY (ullera) REFERENCES ulleres(id_ullera),
-    FOREIGN KEY (empleat) REFERENCES empleats(id_empleat),
-    FOREIGN KEY (client) REFERENCES clients(id_client)
-);
+CREATE TABLE
+    vendes(
+        id_venda INT NOT NULL AUTO_INCREMENT,
+        num_factura VARCHAR(10),
+        ullera INT NOT NULL,
+        empleat INT NOT NULL,
+        client INT NOT NULL,
+        data_venda DATE,
+        PRIMARY KEY (id_venda),
+        FOREIGN KEY (ullera) REFERENCES ulleres(id_ullera),
+        FOREIGN KEY (empleat) REFERENCES empleats(id_empleat),
+        FOREIGN KEY (client) REFERENCES clients(id_client)
+    );
 
 INSERT INTO
     proveidors(
@@ -112,29 +123,25 @@ INSERT INTO
         fax,
         NIF
     )
-VALUES
-    (
+VALUES (
         1,
         'les_millors_ulleres',
         973823422,
         973563456,
         'G34678954'
-    ),
-    (
+    ), (
         2,
         'ulleres_molones',
         923459644,
         923459648,
         'H14485394'
-    ),
-    (
+    ), (
         3,
         'best_glasses',
         954778565,
         953886748,
         'M74835456'
-    ),
-    (
+    ), (
         4,
         'safag',
         971854872,
@@ -153,8 +160,7 @@ INSERT INTO
         data_registre,
         recomanacio
     )
-VALUES
-    (
+VALUES (
         1,
         'Irene',
         'García',
@@ -163,8 +169,7 @@ VALUES
         'irenegf@yahoo.es',
         '2012-12-29',
         NULL
-    ),
-    (
+    ), (
         2,
         'Francesc',
         'Romero',
@@ -173,8 +178,7 @@ VALUES
         'francesc@gmail.com',
         '2015-05-17',
         NULL
-    ),
-    (
+    ), (
         3,
         'Jordi',
         'Grau',
@@ -195,7 +199,8 @@ INSERT INTO
         telefon,
         correu_electronic
     )
-VALUES(
+VALUES
+(
         1,
         'Montse',
         'Rodríguez',
@@ -203,8 +208,7 @@ VALUES(
         '43675456T',
         933556753,
         'montse@hotmail.com'
-    ),
-    (
+    ), (
         2,
         'Joaquim',
         'Bosch',
@@ -212,8 +216,7 @@ VALUES(
         '24535435P',
         935739534,
         'joaquim.bosch@gmail.com'
-    ),
-    (
+    ), (
         3,
         'Olga',
         'Gómez',
@@ -236,7 +239,8 @@ INSERT INTO
         codi_postal,
         pais
     )
-VALUES(
+VALUES
+(
         NULL,
         1,
         NULL,
@@ -247,8 +251,7 @@ VALUES(
         'Barcelona',
         08025,
         'Espanya'
-    ),
-    (
+    ), (
         NULL,
         2,
         NULL,
@@ -259,8 +262,7 @@ VALUES(
         'Sabadell',
         08202,
         'Espanya'
-    ),
-    (
+    ), (
         NULL,
         3,
         NULL,
@@ -271,8 +273,7 @@ VALUES(
         'Glasgow',
         55555,
         'United Kingdom'
-    ),
-    (
+    ), (
         NULL,
         NULL,
         1,
@@ -283,8 +284,7 @@ VALUES(
         'Sant Celoni',
         08740,
         'Espanya'
-    ),
-    (
+    ), (
         NULL,
         NULL,
         2,
@@ -295,8 +295,7 @@ VALUES(
         'Vallirana',
         08759,
         'Espanya'
-    ),
-    (
+    ), (
         NULL,
         NULL,
         3,
@@ -307,8 +306,7 @@ VALUES(
         'Barcelona',
         08013,
         'Espanya'
-    ),
-    (
+    ), (
         1,
         NULL,
         NULL,
@@ -319,8 +317,7 @@ VALUES(
         'Barcelona',
         08013,
         'Espanya'
-    ),
-    (
+    ), (
         2,
         NULL,
         NULL,
@@ -331,8 +328,7 @@ VALUES(
         'Barcelona',
         08003,
         'Espanya'
-    ),
-    (
+    ), (
         3,
         NULL,
         NULL,
@@ -343,8 +339,7 @@ VALUES(
         'Masnou',
         08320,
         'Espanya'
-    ),
-    (
+    ), (
         NULL,
         4,
         NULL,
@@ -356,17 +351,15 @@ VALUES(
         07703,
         'Espanya'
     );
+
 INSERT INTO
-    marques(id_marca, nom_marca, id_proveidor)
-VALUES
-    (543, 'Ray Ban', 1),
-    (345, 'Hugo Boss', 1),
-    (743, 'Prada', 2),
-    (342, 'Tous', 2),
-    (234, 'Etnia Barcelona', 2),
-    (323, 'Carolina Herrera', 3),
-    (235, 'Timberland', 3),
-    (877, 'Ralph Lauren', 3);
+    marques(
+        id_marca,
+        nom_marca,
+        id_proveidor
+    )
+VALUES (543, 'Ray Ban', 1), (345, 'Hugo Boss', 1), (743, 'Prada', 2), (342, 'Tous', 2), (234, 'Etnia Barcelona', 2), (323, 'Carolina Herrera', 3), (235, 'Timberland', 3), (877, 'Ralph Lauren', 3);
+
 INSERT INTO
     ulleres (
         id_ullera,
@@ -379,8 +372,7 @@ INSERT INTO
         color_vidres,
         preu
     )
-VALUES
-    (
+VALUES (
         '1122334455',
         543,
         '0RB3447',
@@ -390,8 +382,7 @@ VALUES
         'daurat',
         'verd',
         101.95
-    ),
-    (
+    ), (
         '1234567890',
         345,
         'BOSS0680/N',
@@ -401,8 +392,7 @@ VALUES
         'negre',
         'transparent',
         145.00
-    ),
-    (
+    ), (
         '1566778844',
         743,
         'PR-06YS-09Q5S0',
@@ -412,8 +402,7 @@ VALUES
         'negre',
         'negre fumat',
         218.95
-    ),
-    (
+    ), (
         '1453467565',
         234,
         'QUINN-SUN/HVBL',
@@ -423,8 +412,7 @@ VALUES
         'color pasta',
         'groc',
         150.50
-    ),
-    (
+    ), (
         '1353345534',
         342,
         'STOA04 0GGD',
@@ -434,8 +422,7 @@ VALUES
         'coure',
         'verd',
         180.25
-    ),
-    (
+    ), (
         '1246464675',
         323,
         'CH-6455.67',
@@ -445,8 +432,7 @@ VALUES
         'negre',
         'transparents',
         220.85
-    ),
-    (
+    ), (
         '1454556464',
         877,
         'RL9033/938',
@@ -456,8 +442,7 @@ VALUES
         'negre',
         'transparents',
         130.50
-    ),
-    (
+    ), (
         '1576455754',
         235,
         'T-9033.938',
@@ -467,8 +452,7 @@ VALUES
         'platejat',
         'transparents',
         180.25
-    ),
-    (
+    ), (
         '1456587988',
         234,
         'SUN/HVBL-YEL',
@@ -478,8 +462,7 @@ VALUES
         'groc amb ratlles',
         'groc',
         190.50
-    ),
-    (
+    ), (
         '1209876547',
         345,
         'BOSN0500J/B',
@@ -490,6 +473,7 @@ VALUES
         'transparent',
         85.00
     );
+
 INSERT INTO
     vendes(
         id_venda,
@@ -499,22 +483,82 @@ INSERT INTO
         client,
         data_venda
     )
-VALUES
-    (1, 'F20-345', '1122334455', 2, 2, '2019-05-09'),
-    (2, 'F20-346', '1234567890', 1, 3, '2017-12-18'),
-    (3, 'F20-347', '1566778844', 3, 2, '2016-09-21'),
-    (4, 'F10-587', '1453467565', 2, 1, '2021-06-26'),
-    (5, 'F10-535', '1353345534', 2, 2, '2019-02-25'),
-    (6, 'F14-234', '1246464675', 3, 1, '2022-01-16'),
-    (7, 'F15-354', '1454556464', 3, 2, '2018-03-11'),
-    (8, 'F15-857', '1576455754', 2, 1, '2015-12-29'),
-    (9, 'F10-544', '1456587988', 1, 1, '2014-11-15'),
-    (10, 'F20-239', '1209876547', 2, 3, '2020-09-23');
-
-
+VALUES (
+        1,
+        'F20-345',
+        '1122334455',
+        2,
+        2,
+        '2019-05-09'
+    ), (
+        2,
+        'F20-346',
+        '1234567890',
+        1,
+        3,
+        '2017-12-18'
+    ), (
+        3,
+        'F20-347',
+        '1566778844',
+        3,
+        2,
+        '2016-09-21'
+    ), (
+        4,
+        'F10-587',
+        '1453467565',
+        2,
+        1,
+        '2021-06-26'
+    ), (
+        5,
+        'F10-535',
+        '1353345534',
+        2,
+        2,
+        '2019-02-25'
+    ), (
+        6,
+        'F14-234',
+        '1246464675',
+        3,
+        1,
+        '2022-01-16'
+    ), (
+        7,
+        'F15-354',
+        '1454556464',
+        3,
+        2,
+        '2018-03-11'
+    ), (
+        8,
+        'F15-857',
+        '1576455754',
+        2,
+        1,
+        '2015-12-29'
+    ), (
+        9,
+        'F10-544',
+        '1456587988',
+        1,
+        1,
+        '2014-11-15'
+    ), (
+        10,
+        'F20-239',
+        '1209876547',
+        2,
+        3,
+        '2020-09-23'
+    );
 
 -- Q  U  E  R  I  E  S      --
-    /* 1. Llista el total de factures d 'un client/a en un període determinat.*/
+
+/* 1. Llista el total de factures d 'un client/a en un període determinat.*/
+
 SELECT
     client,
     nom,
@@ -522,13 +566,11 @@ SELECT
     segon_cognom,
     vendes.num_factura,
     vendes.data_venda
-FROM
-    vendes
+FROM vendes
     INNER JOIN clients ON vendes.client = clients.id_client
 WHERE
     id_client = 2
-    AND data_venda BETWEEN '2019-01-01'
-    AND '2020-12-31';
+    AND data_venda BETWEEN '2019-01-01' AND '2020-12-31';
 
 /*2. Llista els diferents models d'ulleres que ha venut un empleat/da durant un any.*/
 
@@ -539,22 +581,17 @@ SELECT
     vendes.num_factura,
     vendes.ullera,
     vendes.data_venda
-FROM
-    vendes
+FROM vendes
     INNER JOIN empleats ON empleats.id_empleat = vendes.empleat
 WHERE
     empleat = 2
-    AND data_venda BETWEEN '2019-01-01'
-    AND '2019-12-31';
+    AND data_venda BETWEEN '2019-01-01' AND '2019-12-31';
 
 /* Llista els diferents proveïdors que han subministrat ulleres venudes amb èxit per l'òptica. */
 
 SELECT
     DISTINCT proveidors.nom_proveidor
-FROM
-    (
-        (
-            (
+FROM ( ( (
                 proveidors
                 INNER JOIN marques ON marques.id_proveidor = proveidors.id_proveidor
             )

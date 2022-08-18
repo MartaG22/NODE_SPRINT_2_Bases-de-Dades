@@ -26,7 +26,7 @@ CREATE TABLE localitats(
 
 -- DROP TABLE IF EXISTS botigues;
 CREATE TABLE botigues(
-    id_botiga INT(11) NOT NULL AUTO_INCREMENT,
+    id_botiga INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (id_botiga)
     -- adreza VARCHAR(60) NOT NULL,
     -- codi_postal VARCHAR(25) NOT NULL,
@@ -74,9 +74,9 @@ CREATE TABLE empleats(
 
 CREATE TABLE adreces(
     id_adreza INT NOT NULL AUTO_INCREMENT,
-    id_botiga INT(5),
-    id_client INT(5),
-    id_empleat INT(5),
+    id_botiga INT,
+    id_client INT,
+    id_empleat INT,
     carrer VARCHAR(60) NOT NULL,
     numero INT NOT NULL,
     pis VARCHAR(3) NOT NULL,
@@ -137,9 +137,9 @@ CREATE TABLE comandes(
 
 
 CREATE TABLE producte_comanda(
-    id_producte_comanda INT(11) NOT NULL AUTO_INCREMENT,
+    id_producte_comanda INT NOT NULL AUTO_INCREMENT,
     id_producte INT NOT NULL,
-    quantitat INT(2) NOT NULL,
+    quantitat INT NOT NULL,
     id_comanda INT NOT NULL,
     PRIMARY  KEY (id_producte_comanda),
     FOREIGN KEY (id_comanda) REFERENCES comandes (id_comanda)

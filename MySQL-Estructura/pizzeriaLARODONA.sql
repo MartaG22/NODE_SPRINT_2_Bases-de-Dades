@@ -1,3 +1,9 @@
+-- - a la pizzeria s'han de fer un parell de canvis importants: 
+-- ara mateix només et pot demanar un producte per comanda (s'ha de fer una taula intermitja per la relació one2many), 
+-- la taula "entrega" es podria fusionar amb la comanda (és una relació one2one),
+-- les adreces no estàn connectades amb les botigues i les localitats haurien d'estar connectades només amb les adreces
+
+
 DROP DATABASE IF EXISTS PIZZERIA_LARODONA;
 
 CREATE DATABASE PIZZERIA_LARODONA CHARACTER SET utf8mb4;
@@ -83,10 +89,10 @@ CREATE TABLE adreces(
     porta VARCHAR(3) NOT NULL,
     id_localitat INT NOT NULL,
     codi_postal INT NOT NULL,
-    id_provincia INT,
+    -- id_provincia INT,
     PRIMARY KEY (id_adreza),
     FOREIGN KEY (id_localitat) REFERENCES localitats(id_localitat),
-    FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia),
+    -- FOREIGN KEY (id_provincia) REFERENCES provincia (id_provincia),
     FOREIGN KEY (id_botiga) REFERENCES botigues(id_botiga),
     FOREIGN KEY (id_client) REFERENCES clients(id_client),
     FOREIGN KEY (id_empleat) REFERENCES empleats(id_empleat)
@@ -142,7 +148,8 @@ CREATE TABLE producte_comanda(
     quantitat INT NOT NULL,
     id_comanda INT NOT NULL,
     PRIMARY  KEY (id_producte_comanda),
-    FOREIGN KEY (id_comanda) REFERENCES comandes (id_comanda)
+    FOREIGN KEY (id_comanda) REFERENCES comandes (id_comanda),
+    FOREIGN KEY (id_producte) REFERENCES productes(id_producte)
 );
 
 
@@ -260,25 +267,42 @@ VALUES
     (8, 'Jaume', 'Ortega', 'Coma', '67234534S', 972456423, 'jaumeortega@gmail.com', 'repartidor', 3 );
 
 
-INSERT INTO adreces(id_adreza, id_botiga, id_client, id_empleat, carrer, numero, pis, porta, id_localitat, codi_postal, id_provincia)
+INSERT INTO adreces(id_adreza, id_botiga, id_client, id_empleat, carrer, numero, pis, porta, id_localitat, codi_postal)
+-- INSERT INTO adreces(id_adreza, id_botiga, id_client, id_empleat, carrer, numero, pis, porta, id_localitat, codi_postal, id_provincia)
 VALUES
-    (1, NULL, 1, NULL, 'Carrer Còrsega', 458, '3', '3', 1, 08025, 1),
-    (2, NULL, 2, NULL, 'Carrer de Brujas', 106, '1', 'A', 16, 08202, 1),
-    (3, NULL, NULL, 1, 'Carrer Major', 30, '1', '1', 17, 08740, 1),
-    (4, NULL, NULL, 2, 'Carrer Sicília', 215, 'Bx.', '1', 1, 08013, 1),
-    (5, NULL, 3, NULL, 'Carrer Alacant', 58, '1', '4', 18, 08224, 1),
-    (6, NULL, NULL, 3, 'Carrer Comerç', 10, 'Bx.', '-', 19, 08759, 1),
-    (7, NULL, NULL, 4, 'Carrer Cinca', 35, '3', '5', 1, 08030, 1),
-    (8, NULL, NULL, 5, 'Carrer Sòcrates', 24, '1', '1', 1, 08030, 1),
-    (9, NULL, NULL, 6, 'Carrer Subirats', 87, '3', '1', 20, 08800, 1),
-    (10, NULL, 4, NULL, 'Carrer Gran', 4, '2', '2', 8, 17600, 4),
-    (11, NULL, NULL, 7, 'Passeig Central', 65, '3', 'B', 21, 17497, 4),
-    (12, NULL, NULL, 8, 'Carrer del Mar', 15, 'Bx.', '-', 22, 17496, 4),
-    (13, 1, NULL, NULL, 'Carrer Indústria', 145, 'Bx.', '-', 1, 08025, 1),
-    (14, 2, NULL, NULL, 'Carrer dels Arcs', 34, '-', '-', 11, 43880, 2),
-    (15, 3, NULL, NULL, 'Carrer de Pere III', 7, '-', '-', 8, 17600, 4),
-    (16, 4, NULL, NULL, 'Passatge del Mig', 16, 'Bx.', '-', 14, 25737, 3);
+    (1, NULL, 1, NULL, 'Carrer Còrsega', 458, '3', '3', 1, 08025),
+    (2, NULL, 2, NULL, 'Carrer de Brujas', 106, '1', 'A', 16, 08202),
+    (3, NULL, NULL, 1, 'Carrer Major', 30, '1', '1', 17, 08740),
+    (4, NULL, NULL, 2, 'Carrer Sicília', 215, 'Bx.', '1', 1, 08013),
+    (5, NULL, 3, NULL, 'Carrer Alacant', 58, '1', '4', 18, 08224),
+    (6, NULL, NULL, 3, 'Carrer Comerç', 10, 'Bx.', '-', 19, 08759),
+    (7, NULL, NULL, 4, 'Carrer Cinca', 35, '3', '5', 1, 08030),
+    (8, NULL, NULL, 5, 'Carrer Sòcrates', 24, '1', '1', 1, 08030),
+    (9, NULL, NULL, 6, 'Carrer Subirats', 87, '3', '1', 20, 08800),
+    (10, NULL, 4, NULL, 'Carrer Gran', 4, '2', '2', 8, 17600),
+    (11, NULL, NULL, 7, 'Passeig Central', 65, '3', 'B', 21, 17497),
+    (12, NULL, NULL, 8, 'Carrer del Mar', 15, 'Bx.', '-', 22, 17496),
+    (13, 1, NULL, NULL, 'Carrer Indústria', 145, 'Bx.', '-', 1, 08025),
+    (14, 2, NULL, NULL, 'Carrer dels Arcs', 34, '-', '-', 11, 43880),
+    (15, 3, NULL, NULL, 'Carrer de Pere III', 7, '-', '-', 8, 17600),
+    (16, 4, NULL, NULL, 'Passatge del Mig', 16, 'Bx.', '-', 14, 25737);
 
+    -- (1, NULL, 1, NULL, 'Carrer Còrsega', 458, '3', '3', 1, 08025, 1),
+    -- (2, NULL, 2, NULL, 'Carrer de Brujas', 106, '1', 'A', 16, 08202, 1),
+    -- (3, NULL, NULL, 1, 'Carrer Major', 30, '1', '1', 17, 08740, 1),
+    -- (4, NULL, NULL, 2, 'Carrer Sicília', 215, 'Bx.', '1', 1, 08013, 1),
+    -- (5, NULL, 3, NULL, 'Carrer Alacant', 58, '1', '4', 18, 08224, 1),
+    -- (6, NULL, NULL, 3, 'Carrer Comerç', 10, 'Bx.', '-', 19, 08759, 1),
+    -- (7, NULL, NULL, 4, 'Carrer Cinca', 35, '3', '5', 1, 08030, 1),
+    -- (8, NULL, NULL, 5, 'Carrer Sòcrates', 24, '1', '1', 1, 08030, 1),
+    -- (9, NULL, NULL, 6, 'Carrer Subirats', 87, '3', '1', 20, 08800, 1),
+    -- (10, NULL, 4, NULL, 'Carrer Gran', 4, '2', '2', 8, 17600, 4),
+    -- (11, NULL, NULL, 7, 'Passeig Central', 65, '3', 'B', 21, 17497, 4),
+    -- (12, NULL, NULL, 8, 'Carrer del Mar', 15, 'Bx.', '-', 22, 17496, 4),
+    -- (13, 1, NULL, NULL, 'Carrer Indústria', 145, 'Bx.', '-', 1, 08025, 1),
+    -- (14, 2, NULL, NULL, 'Carrer dels Arcs', 34, '-', '-', 11, 43880, 2),
+    -- (15, 3, NULL, NULL, 'Carrer de Pere III', 7, '-', '-', 8, 17600, 4),
+    -- (16, 4, NULL, NULL, 'Passatge del Mig', 16, 'Bx.', '-', 14, 25737, 3);
 
 
 

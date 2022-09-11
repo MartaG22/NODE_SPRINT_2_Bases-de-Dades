@@ -18,7 +18,15 @@ db.restaurants.find({"borough": "Bronx"},  {$or: [{"cuisine": {$regex: /American
 db.restaurants.find({$or: [{"borough": "Staten Island"}, {"borough": "Queens"}, {"borough": "Bronx"}, {"borough": "Brooklyn"}]},{"name":1, "restaurant_id":1, "borough":1, "cuisine":1, "_id":0});
 db.restaurants.find({$nor: [{"borough": "Staten Island"}, {"borough": "Queens"}, {"borough": "Bronx"}, {"borough": "Brooklyn"}]},{"name":1, "restaurant_id":1, "borough":1, "cuisine":1, "_id":0});
 db.restaurants.find({"grades.score": {$lte: 10}}, {"name":1, "restaurant_id":1, "borough":1, "grades.score":1, "cuisine":1, "_id":0});
+<<<<<<< HEAD
 db.restaurants.find({ $and: [{ "cuisine": ("Seafood", "American", "Chinese") }, { "name": { $regex: /^Wil/ } }] }, { "name": 1, "restaurant_id": 1, "borough": 1, "cuisine": 1, "_id": 0 }); //! corregir  NO VA
+=======
+db.restaurants.find({$and: [{ "cuisine": {$in: ["Seafood"], $nin: ["American", "Chinese"]}}, { "name": {$not: { $regex: /^Wil/ } }] }, { "name": 1, "restaurant_id": 1, "borough": 1, "cuisine": 1, "_id": 0 }); //! corregida (provar)
+
+// db.restaurant .find({$and: [{cuisine: {$in: ["Seafood"], $nin: ["American ", "Chinese"]}}, {name: {$not: {$regex: /^wil/i}}}]}, {restaurant_id: 1, name: 1, borough: 1, cuisine: 1}).pretty()
+
+
+>>>>>>> 6573719dabc7df9abf22494be285cf44e38b8d58
 db.restaurants.find({"grades.grade": "A", "grades.score": 11, "grades.date": ISODate("2014-08-11T00:00:00Z")}, {"restaurant_id":1, "name":1, "grades":1, "_id":0}).pretty();
 db.restaurants.find({"grades.1.grade": "A", "grades.1.score": 9, "grades.1.date": ISODate("2014-08-11T00:00:00Z")}, {"restaurant_id":1, "name":1, "grades.grade":1});
 db.restaurants.find({"address.coord.1": {$gt: 42, $lte: 52}},{"restaurant_id":1, "name":1, "address":1});

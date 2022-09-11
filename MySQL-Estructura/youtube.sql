@@ -133,7 +133,7 @@ INSERT INTO
 VALUES
   (1, 'Descobriments', 1),
   (2, 'Manualitats', 2),
-  (3, 'Coses meves', 3)
+  (3, 'Coses meves', 3);
 
 
 INSERT INTO
